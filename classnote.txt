@@ -1,0 +1,24 @@
+Instagram Clone 
+
+- Auth 
+    - user registration 
+    - user login
+    - user account verify by email and OTP System 
+    - Forgot password 
+    - login with facebook, twitter, linkedin, google - firebase
+
+- User profile
+    - profile info update
+    - Profile photo update
+    - Password update
+
+- Apps features 
+    - create a post with photo
+    - put love react 
+    - put a comment into a post 
+    - replay a comment
+    - emoji comments 
+    - post saved feature
+    - Follow a user
+    - two factor auth 
+
