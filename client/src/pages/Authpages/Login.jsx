@@ -2,7 +2,7 @@ import React from 'react'
 import AuthFooter from '../../components/AuthFooter/AuthFooter';
 import AuthSlide from '../../components/AuthSlide/AuthSlide';
 import './AuthPage.scss';
-import './Login.scss'
+
 
 const Login = () => {
   return (
@@ -11,7 +11,7 @@ const Login = () => {
         <div className="auth-main-cont">
           <div className="auth-slider">
             <div className="slider-box">
-              {/* <AuthSlide/> */}
+              <AuthSlide/>
             </div>
           </div>
           <div className="auth-content">
@@ -22,7 +22,7 @@ const Login = () => {
       </div>
       <div className="auth-footer">
           <AuthFooter/>
-        </div>
+      </div>
     </>
   )
 }

@@ -1,10 +1,10 @@
 import { Route, Routes } from "react-router-dom";
 import Home from "./pages/Home/Home";
-import Login from "./pages/Login/Login";
+import Login from "./pages/Authpages/Login";
 import Profile from "./pages/Profile/Profile";
-import Register from "./pages/Register/Register";
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.scss'
+import Register from "./pages/Authpages/Register";
 
 function App() {
   return (
