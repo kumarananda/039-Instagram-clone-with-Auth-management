@@ -1,5 +1,9 @@
 import Carousel from 'react-bootstrap/Carousel';
 import './AuthSlide.scss'
+import authSlider1 from './img/authSlider1.png'
+import authSlider2 from './img/authSlider2.png'
+import authSlider3 from './img/authSlider3.png'
+import authSlider4 from './img/authSlider4.png'
 
 // localhost:3000/login#carouselExampleControls
 // https://react-bootstrap.github.io/components/carousel/
@@ -10,32 +14,16 @@ const AuthSlide = () => {
       <div className="auth-carousel-box">
             <Carousel controls={false}  fade indicators={false} interval={"2000"}  variant="dark">
               <Carousel.Item>
-                <img
-                  className=" "
-                  src="https://www.instagram.com/static/images/homepage/screenshots/screenshot4.png/a4fd825e3d49.png"
-                  alt="First slide"
-                />
+                <img src={authSlider1} alt="First slide" />
               </Carousel.Item>
               <Carousel.Item>
-                <img 
-                  className=""
-                  src="https://www.instagram.com/static/images/homepage/screenshots/screenshot2.png/4d62acb667fb.png"
-                  alt="Second slide"
-                />
+                <img src={authSlider2} alt="Second slide" />
               </Carousel.Item>
               <Carousel.Item>
-                <img
-                  className=" "
-                  src="https://www.instagram.com/static/images/homepage/screenshots/screenshot3.png/94edb770accf.png"
-                  alt="Third slide"
-                />
+                <img src={authSlider3} alt="Third slide" />
               </Carousel.Item>
               <Carousel.Item>
-                <img
-                  className=""
-                  src="https://www.instagram.com/static/images/homepage/screenshots/screenshot1.png/fdfe239b7c9f.png"
-                  alt="Forth slide"
-                />
+                <img src={authSlider4} alt="Forth slide" />
               </Carousel.Item>
             </Carousel>
       </div>
