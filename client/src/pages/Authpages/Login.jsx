@@ -1,7 +1,8 @@
 import React from 'react'
+import './AuthPage.scss';
 import AuthFooter from './AuthComponents/AuthFooter/AuthFooter';
 import AuthSlide from './AuthComponents/AuthSlide/AuthSlide';
-import './AuthPage.scss';
+
 
 
 const Login = () => {

@@ -1,76 +1,201 @@
 
 
-.sign-container {
+.auth-container-content {
     
 
-    .logo-box {
-        margin-top: 36px;
-        margin-bottom: 12px;
-    }
-
-
-
-}
-
-.if-account-or-not {
-
-    .head-text {
-
-        h3 {
-
-        }
-    }
-}
-
-.account-with-btn {
-    background-color: #fff;
-    padding: 10px 0;
-    border: 1px solid rgba(100, 95, 95, 0.5);
-    margin-bottom: 10px;
-    
-    span {
+    .auth-form-box {
+        padding-left: 40px;
+        padding-right: 40px;
+        border: 1px solid #dbdbdb;
         
-        color: rgba(38,38,38,1);
-        font-size: 14px;
-        margin: 15px;
-        text-align: center;
+        margin-bottom: 8px;
 
-        p{
-            margin: 0;
+        .logo-box {
+            margin-top: 36px;
+            margin-bottom: 12px;
         }
-        
+        .head-text {
+            margin-bottom: 10px;
+            margin-top: 10px;
+            h5  {
+                color: #8e8e8e;
+                color: rgba(var(--f52,142,142,142),1);
+                font-size: 17px;
+                font-weight: 600;
+                line-height: 20px;
+                text-align: center;
 
-    }
-}
-
-.get-app {
-    
-    .text {
-        p {
-            font-size: 14px;
-            line-height: 18px;
-            margin: 10px 20px 10px 20px;
-            text-align: center;
-        }
-    }
-    .app {
-        padding:  10px 0 10px 0;
-        display: block;
-
-        .app-box {
-            display: flex;
-            gap: 8px;
-            justify-content: center;
-            .google, .apple {
-            
-                img {
-                    height: 40px;
-                }
             }
         }
-        
+
+        .account-with {
+
+            
+            .account-with-btn {
+                border: 1px solid transparent;
+                border-radius: 4px;
+                background: #0095f6;
+                margin-bottom: 10px;
+                a {
+                    
+                    button {
+                        width: 100%;
+                        border: 1px solid transparent;
+                        color: #fff;
+                        
+                        
+                        
+                        h4 {
+                            
+                            font-size: 14px;
+                            font-weight: 600;
+                            line-height: 20px;
+                            text-align: center;
+                            margin-bottom: 0;
+    
+                            svg {
+                                display: inline-block;
+                                position: relative;
+                                top: -2px;
+                                height: 20px;
+                                width: 20px;
+                            }
+                        }
+                    }
+                    
+
+                }
+                
+
+
+            }
+        }
+
+        .divider-or {
+            margin: 16px 0;
+            text-transform: uppercase;
+            position: relative;
+            font-size: 14px;
+            line-height: 16px;
+            font-weight: 600;
+            color: #a09393;
+            &::before {
+                content: '';
+                display: block;
+                clear: both;
+                width: 40%;
+                height: 1px;
+                top: 8px;
+                background-color: #dbdbdb;
+                position: absolute;
+                left: 0;
+            }
+            &::after {
+                content: '';
+                display: block;
+                clear: both;
+                width: 40%;
+                height: 1px;
+                top: 8px;
+                background-color: #dbdbdb;
+                position: absolute;
+                right: 0;
+            }
+        }
+
+        .input-form {
+            form {
+
+                input {
+                    width: 100%;
+
+
+                    &:focus {
+                         
+                    }
+
+                }
+
+                p.sign-up-msg {
+
+
+                    a {
+
+
+                    }
+                }
+
+
+
+            }
+        }
+
 
 
     }
 
+
+
+
+    .if-account-or-not {
+        background-color: #fff;
+        border: 1px solid #dbdbdb;
+        margin-bottom: 10px;
+        padding: 05px 0;
+        
+        span {
+            
+            color: rgba(38,38,38,1);
+            font-size: 14px;
+            margin: 15px;
+            text-align: center;
+            
+
+            h5{
+                margin: 0;
+                font-size: 14px;
+                font-weight: 500;
+
+                a {
+
+                    font-size: 14px;
+                    font-weight: 600;
+                }
+            }
+            
+
+        }
+    }
+
+    .get-app {
+        
+        .text {
+            p {
+                font-size: 14px;
+                line-height: 18px;
+                margin: 10px 20px 10px 20px;
+                text-align: center;
+            }
+        }
+        .app {
+            padding:  10px 0 10px 0;
+            display: block;
+
+            .app-box {
+                display: flex;
+                gap: 8px;
+                justify-content: center;
+                .google, .apple {
+                
+                    img {
+                        height: 40px;
+                    }
+                }
+            }
+            
+
+
+        }
+
+    }
 }

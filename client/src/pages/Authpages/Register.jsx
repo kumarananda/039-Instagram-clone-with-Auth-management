@@ -1,4 +1,5 @@
 import React from 'react'
+import './AuthPage.scss';
 import AuthFooter from './AuthComponents/AuthFooter/AuthFooter';
 import AuthRegister from './AuthComponents/AuthRegister/AuthRegister';
 import AuthSlide from './AuthComponents/AuthSlide/AuthSlide';
@@ -9,11 +10,11 @@ const Register = () => {
     <>
       <div className="auth-page">
         <div className="auth-main-cont">
-          <div className="auth-slider">
+          {/* <div className="auth-slider">
             <div className="slider-box">
               <AuthSlide/>
             </div>
-          </div>
+          </div> */}
           <div className="auth-content">
             <AuthRegister/>
           </div>

@@ -8,12 +8,14 @@
 }
 a {
     color: rgb(145, 145, 145);
+    
 }
 .auth-page {
     background-color: reda(250.250.250.1);
     display: flex;
     justify-content: center;
-    width: 935px;
+    max-width: 935px;
+    width: 100%;
     margin: auto;
     
 
@@ -49,7 +51,7 @@ a {
             max-width: 350px;
             width: 100%;
 
-            background-color: rgb(174, 202, 188);
+            // background-color: rgb(202, 209, 205);
         }
     }
 
