@@ -42,12 +42,14 @@ a {
         
         .auth-content {
             display: flex;
-            justify-content: center;
+            flex-direction: column;
+            gap: 5px;
+            text-align: center;
             margin-top: 12px;
-            // max-width: 350px;
-            width: 350px;
-            height: 500px;
-            background-color: rgb(140, 175, 158);
+            max-width: 350px;
+            width: 100%;
+
+            background-color: rgb(174, 202, 188);
         }
     }
 

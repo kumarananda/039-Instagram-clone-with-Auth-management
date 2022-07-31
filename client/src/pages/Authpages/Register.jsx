@@ -1,6 +1,7 @@
 import React from 'react'
-import AuthFooter from '../../components/AuthFooter/AuthFooter'
-import AuthSlide from '../../components/AuthSlide/AuthSlide'
+import AuthFooter from './AuthComponents/AuthFooter/AuthFooter';
+import AuthRegister from './AuthComponents/AuthRegister/AuthRegister';
+import AuthSlide from './AuthComponents/AuthSlide/AuthSlide';
 
 
 const Register = () => {
@@ -14,7 +15,7 @@ const Register = () => {
             </div>
           </div>
           <div className="auth-content">
-            
+            <AuthRegister/>
           </div>
         </div>
         

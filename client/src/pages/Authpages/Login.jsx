@@ -1,6 +1,6 @@
 import React from 'react'
-import AuthFooter from '../../components/AuthFooter/AuthFooter';
-import AuthSlide from '../../components/AuthSlide/AuthSlide';
+import AuthFooter from './AuthComponents/AuthFooter/AuthFooter';
+import AuthSlide from './AuthComponents/AuthSlide/AuthSlide';
 import './AuthPage.scss';
 
 

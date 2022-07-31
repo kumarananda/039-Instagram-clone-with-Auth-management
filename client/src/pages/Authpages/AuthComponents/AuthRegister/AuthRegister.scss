@@ -1,0 +1,76 @@
+
+
+.sign-container {
+    
+
+    .logo-box {
+        margin-top: 36px;
+        margin-bottom: 12px;
+    }
+
+
+
+}
+
+.if-account-or-not {
+
+    .head-text {
+
+        h3 {
+
+        }
+    }
+}
+
+.account-with-btn {
+    background-color: #fff;
+    padding: 10px 0;
+    border: 1px solid rgba(100, 95, 95, 0.5);
+    margin-bottom: 10px;
+    
+    span {
+        
+        color: rgba(38,38,38,1);
+        font-size: 14px;
+        margin: 15px;
+        text-align: center;
+
+        p{
+            margin: 0;
+        }
+        
+
+    }
+}
+
+.get-app {
+    
+    .text {
+        p {
+            font-size: 14px;
+            line-height: 18px;
+            margin: 10px 20px 10px 20px;
+            text-align: center;
+        }
+    }
+    .app {
+        padding:  10px 0 10px 0;
+        display: block;
+
+        .app-box {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            .google, .apple {
+            
+                img {
+                    height: 40px;
+                }
+            }
+        }
+        
+
+
+    }
+
+}
