@@ -5,13 +5,17 @@
     font-size: 12px;
     font-weight: 400;
     
+    
+}
+body {
+    background-color: rgba(250,250,250,1);
 }
 a {
     color: rgb(145, 145, 145);
     
 }
 .auth-page {
-    background-color: reda(250.250.250.1);
+    
     display: flex;
     justify-content: center;
     max-width: 935px;
@@ -45,7 +49,7 @@ a {
         .auth-content {
             display: flex;
             flex-direction: column;
-            gap: 5px;
+            // gap: 5px;
             text-align: center;
             margin-top: 12px;
             max-width: 350px;

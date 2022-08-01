@@ -23,7 +23,7 @@ const AuthRegister = () => {
           
           <div className="account-with">
             <div className="account-with-btn ">
-              <a href=""><button className='btn btn-sm '> <h4> <AiFillFacebook/> Log in with Facebook</h4></button></a>
+              <a href=""><button className='btn btn-sm '> <div className='text'> <AiFillFacebook/> Log in with Facebook</div></button></a>
             </div>
           </div>
 
@@ -33,6 +33,12 @@ const AuthRegister = () => {
 
           <div className="input-form">
             <form action="#">
+              <div className="inp-box">
+                <label className='inp-box-lavel'>
+                  <span  className='box-lavel cont-lavel '>Mobile Number or Email</span>
+                  <input placeholder='Mobile Number or Email' className='box-input cont-input' name='emailorphone' type="text" />
+                </label>
+              </div>
               <input type="text" placeholder='Mobile Number or Email'/>
               <input type="text" placeholder='Full Name'/>
               <input type="text" placeholder='Username'/>
@@ -40,7 +46,7 @@ const AuthRegister = () => {
 
               <p className='sign-up-msg'>
                 People who use our service may have uploaded your contact information to Instagram. <a href="#">Learn More</a> <br /> <br />
-                By signing up, you agree to our Terms , <a href="#">Privacy Policy</a> and <a href="#">Cookies Policy</a>.
+                By signing up, you agree to our Terms , <a  href="#">Privacy Policy</a> and <a href="#">Cookies Policy</a>.
               </p>
               <input className='btn  ' type="submit" value="Sign up"/>
             </form>

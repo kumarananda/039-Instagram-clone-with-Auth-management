@@ -7,12 +7,14 @@
         padding-left: 40px;
         padding-right: 40px;
         border: 1px solid #dbdbdb;
+        background-color: #fff;
         
         margin-bottom: 8px;
 
         .logo-box {
             margin-top: 36px;
             margin-bottom: 12px;
+            background-color: #fff;
         }
         .head-text {
             margin-bottom: 10px;
@@ -42,16 +44,18 @@
                         width: 100%;
                         border: 1px solid transparent;
                         color: #fff;
+                        background: #0095f6;
                         
                         
                         
-                        h4 {
+                        .text {
                             
                             font-size: 14px;
                             font-weight: 600;
                             line-height: 20px;
                             text-align: center;
                             margin-bottom: 0;
+                            background: #0095f6;
     
                             svg {
                                 display: inline-block;
@@ -59,6 +63,7 @@
                                 top: -2px;
                                 height: 20px;
                                 width: 20px;
+                                background: #0095f6;
                             }
                         }
                     }
@@ -106,21 +111,72 @@
         .input-form {
             form {
 
+                .inp-box {
+                    border: 1px solid #dbdbdb;
+                    border-radius: 3px;
+                    text-align: left;
+                    line-height: 36px;
+                    position: relative;
+                    margin-bottom: 6px;
+                    background-color: rgb(250, 250, 250);
+
+                    .inp-box-lavel {
+
+                        .box-lavel {
+                            padding: 0 5px;
+                            
+
+                        }
+                        .cont-lavel {
+                            position: absolute;
+                            top: -11px;
+                            font-size: 10px;
+                        }
+                        input{
+                            margin-bottom: 0;
+                            background: transparent;
+                            outline: none; 
+                            border: none;
+                        }
+                        .box-input {
+                            line-height: 0px;
+                            padding: 0 5px;
+                            
+
+                        }
+                        .cont-input {
+                            position: absolute;
+                            bottom: 4px;
+                        }
+                    }
+
+                }
+
                 input {
                     width: 100%;
-
+                    border: 1px solid #dbdbdb;
+                    outline: none;
+                    border-radius: 3px;
+                    margin-bottom: 6px;
+                    line-height: 36px;
+                    padding: 0 5px;
 
                     &:focus {
-                         
+                        border: 1px solid #9e9e9e;
                     }
 
                 }
 
                 p.sign-up-msg {
+                    color: rgba(145, 145, 145, 1);
 
+                    br {
+
+                    }
 
                     a {
-
+                        color: rgba(145, 145, 145, 1);
+                        font-weight: 600;
 
                     }
                 }
