@@ -1,0 +1,41 @@
+
+.header {
+    margin: auto;
+
+    justify-content: center;
+    display: flex;
+    border-bottom: 1px solid rgba(219, 219, 219, 1);
+    
+    .header-box {
+        max-width: calc(935px + 40px);
+        justify-content: center;
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        padding: 0 20px;
+        
+
+        .header-item {
+            width: 33.33%;
+            height: 60px;
+            
+        }
+        .header-left {
+            
+            .header-logo {
+                margin: 15px 0;
+                img{
+                    width: 103px;
+                    height: auto;
+                }
+            }
+        }
+        .header-medile {
+            
+        }
+        .header-right {
+
+        }
+    }
+
+}
