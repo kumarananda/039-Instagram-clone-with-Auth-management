@@ -109,6 +109,7 @@
         }
 
         .input-form {
+            margin-bottom: 38px;
             form {
 
                 .inp-box {
@@ -124,11 +125,11 @@
 
                         .box-lavel {
                             padding: 0 5px;
-                            
+                            position: absolute;
 
                         }
                         .cont-lavel {
-                            position: absolute;
+                            
                             top: -11px;
                             font-size: 10px;
                         }
@@ -151,7 +152,58 @@
                     }
 
                 }
+                // test
+                .inp-box2 {
+                    border: 1px solid #dbdbdb;
+                    border-radius: 3px;
+                    text-align: left;
+                    line-height: 36px;
+                    position: relative;
+                    margin-bottom: 6px;
+                    background-color: rgb(250, 250, 250);
 
+                    .inp-box-lavel {
+
+                        .box-lavel {
+                            padding: 0 5px;
+                            position: absolute;
+                            font-size: 12px;
+                            top: 0px;
+                            
+
+                        }
+                        .cont-lavel {
+
+                            top: -11px;
+                            font-size: 10px;
+                        }
+
+                        input{
+                            margin-bottom: 0;
+                            background: transparent;
+                            outline: none; 
+                            border: none;
+                        }
+
+
+                        .box-input {
+                            position: absolute;
+                            bottom: 8px;
+                            line-height: 0px;
+                            padding: 0 5px;
+                            
+
+                        }
+                        .cont-input {
+                            bottom: 4px;
+                        }
+                    }
+
+                }
+
+
+
+                // previous 
                 input {
                     width: 100%;
                     border: 1px solid #dbdbdb;
@@ -167,12 +219,25 @@
 
                 }
 
+                .submit-btn {
+                    font-size: 14px;
+                    font-weight: 600;
+                    line-height: 20px;
+                    text-align: center;
+                    margin-bottom: 18px 0;
+                    background-color: #0095f6;
+                    border: 1px solid transparent;
+                    border-radius: 4px;
+                    padding: 4px 0;
+                    color: #fff;
+                    margin-bottom: 0;
+                }
+
                 p.sign-up-msg {
                     color: rgba(145, 145, 145, 1);
+                    line-height: 16px;
+                    margin-top: 10px ;
 
-                    br {
-
-                    }
 
                     a {
                         color: rgba(145, 145, 145, 1);

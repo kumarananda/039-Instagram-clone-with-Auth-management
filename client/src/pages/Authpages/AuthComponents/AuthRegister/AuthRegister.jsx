@@ -1,10 +1,13 @@
 
 import React from 'react'
+import {Link} from 'react-router-dom'
 import './AuthRegister.scss'
 import authlogo from '../../AuthImges/authlogo.png'
 import appleStore from '../../AuthImges/apple-store.png'
 import playStore from '../../AuthImges/play-store.png'
 import {AiFillFacebook} from 'react-icons/ai'
+
+
 
 const AuthRegister = () => {
   return (
@@ -39,18 +42,25 @@ const AuthRegister = () => {
                   <input placeholder='Mobile Number or Email' className='box-input cont-input' name='emailorphone' type="text" />
                 </label>
               </div>
-              <input type="text" placeholder='Mobile Number or Email'/>
+              <div className="inp-box2">
+                <label className='inp-box-lavel'>
+                  <span  className='box-lavel cont-lavel '>Mobile Number or Email</span>
+                  <input placeholder='' className='box-input cont-input' name='emailorphone' type="text" />
+                </label>
+              </div>
+              {/* <input type="text" placeholder='Mobile Number or Email'/> */}
               <input type="text" placeholder='Full Name'/>
               <input type="text" placeholder='Username'/>
               <input type="text" placeholder='Password'/>
 
               <p className='sign-up-msg'>
-                People who use our service may have uploaded your contact information to Instagram. <a href="#">Learn More</a> <br /> <br />
+                People who use our service may have uploaded your contact information to Instagram. <a href="#">Learn More</a> <br /><br /> {/*<div className='space-br' /> <div className='space-br' />*/}
                 By signing up, you agree to our Terms , <a  href="#">Privacy Policy</a> and <a href="#">Cookies Policy</a>.
               </p>
-              <input className='btn  ' type="submit" value="Sign up"/>
+              <input className=' submit-btn ' type="submit" value="Sign up"/>
             </form>
           </div>
+            
 
 
 
@@ -59,7 +69,7 @@ const AuthRegister = () => {
         </div>
 
         <div className=" if-account-or-not">
-          <span><h5 className=''>Have an account? <a href="#">Log in</a></h5></span>
+          <span><h5 className=''>Have an account? <Link to={"/login"}>Log in</Link></h5></span>
         </div>
 
         <div className="get-app">

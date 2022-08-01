@@ -1,0 +1,71 @@
+
+
+.auth-container-content {
+
+    .login-form {
+
+        .logo-box {
+            margin-top: 45px;
+            margin-bottom: 10px;
+        }
+        .input-form {
+            margin-top: 24px;
+            margin-bottom: 16px;
+        }
+        .divider-or {
+            margin-bottom: 14px;
+        }
+
+        .account-with {
+            .account-with-btn {
+                border: none;
+                border-radius: 4px;
+                background: #fff;
+                margin-bottom: 10px;
+
+                a {
+                   
+                    button {
+                        background: #fff !important;
+                        color: #385185;
+                        border: none;
+  
+                        .text {
+                            line-height: 25px;
+                            margin-bottom: 0;
+                            background: #fff;
+    
+                            svg {
+                                color: #385185;
+                                background: #fff;
+                            }
+                        }
+                    }
+                    
+    
+                }
+                
+    
+    
+            }
+        }
+
+        .forgot-pass {
+            margin-top: 10px;
+            margin-bottom: 20px;
+            a {
+                color: #000;
+                cursor: pointer;
+                display: block;
+            }
+        }
+
+
+
+
+
+    }
+
+
+
+}
