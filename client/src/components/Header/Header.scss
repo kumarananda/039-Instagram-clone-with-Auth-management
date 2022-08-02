@@ -8,7 +8,7 @@
     
     .header-box {
         max-width: calc(935px + 40px);
-        justify-content: center;
+        justify-content: space-between;
         display: flex;
         flex-direction: row;
         width: 100%;
@@ -16,7 +16,7 @@
         
 
         .header-item {
-            width: 33.33%;
+            // width: 33.33%;
             height: 60px;
             
         }
@@ -72,6 +72,7 @@
                     img {
                         width: 24px;
                         height: 24px;
+                        object-fit: cover;
                         border-radius: 50%;
                     }
                 }
