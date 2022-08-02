@@ -34,7 +34,48 @@
             
         }
         .header-right {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            .right-items:not(:first-child){
+                margin-left: 22px;
+            }
 
+            .right-items{
+                width: 24px;
+                height: 24px;
+                a {
+                    color: #262626;
+                    &:hover {
+                        color: #262626; 
+                    }
+                    svg{
+                        width: 100%;
+                        height: 100%;
+                    }
+    
+
+
+                }
+
+            }
+            .right-items{
+                .por-img {
+                    height: 28px;
+                    width: 28px;
+                    border: 1px solid rgb(38, 38, 38);
+                    border-radius: 50%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+    
+                    img {
+                        width: 24px;
+                        height: 24px;
+                        border-radius: 50%;
+                    }
+                }
+            }
         }
     }
 
