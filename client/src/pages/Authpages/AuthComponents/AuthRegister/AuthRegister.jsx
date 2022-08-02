@@ -59,11 +59,7 @@ const AuthRegister = () => {
               </p>
               <input className=' submit-btn ' type="submit" value="Sign up"/>
             </form>
-          </div>
-            
-
-
-
+          </div>       
 
 
         </div>
