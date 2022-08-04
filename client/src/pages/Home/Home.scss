@@ -4,6 +4,7 @@
 
 .site-header {
     position: relative;
+    z-index: 9;
     
 
 
@@ -29,7 +30,7 @@
     .post-aria-box {
         margin-top: 10px;
         width: 470px;
-        height: 1300px;
+        // height: 1300px;
         margin-right: 32px;
 
 

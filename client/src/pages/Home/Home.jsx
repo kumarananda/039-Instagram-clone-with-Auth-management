@@ -32,8 +32,6 @@ const Home = () => {
         <div className="suggestion-aria-box">
           <div className="header-space-div"></div>
             
-
-
         </div>
       </div>
       <div className="site-footer">
