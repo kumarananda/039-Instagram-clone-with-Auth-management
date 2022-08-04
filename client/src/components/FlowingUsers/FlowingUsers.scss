@@ -1,0 +1,73 @@
+
+        .flowing-users{
+            border: 1px solid rgba(219, 219, 219, 1);
+            padding: 10px 0 0 0;
+            border-radius: 7px;
+            overflow: hidden;
+            // margin-top: 5px;
+
+            .user-box {
+                display: flex;
+                flex-direction: row;
+                margin-top: 5px;
+
+
+
+                .user-box-items{
+                    width: 74px;
+                    margin-left: 12px;
+                    
+                    
+                    a{
+                        color: rgb(59, 59, 59);
+                        text-align: center;
+                        
+                        
+
+                        .img-wrapar {
+                            height: 66px;
+                            width: 66px;
+                            // border: 3px solid #db2ecf;
+                            background: url('./download.png');
+                            background-position: center center;
+                            background-repeat: no-repeat;
+                            border-radius: 50%;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            margin-bottom: 5px;
+
+
+                            img{
+                                width: 56px;
+                                height: 56px;
+                                border-radius: 50%;
+                            }
+
+                        }
+                        
+                        .user-name {
+                            
+                            box-sizing: border-box;
+                            display: block;
+                            max-width: 66px;
+                            overflow: hidden;
+                            position: relative;
+                            text-align: center;
+                            text-overflow: ellipsis;
+                            white-space: nowrap;
+                            width: 100%;
+                            font-size: 14px;
+                            padding-left: 2px;
+                            padding-right: 2px;
+                            
+                        }
+                    }
+                }
+                .user-box-items:nth-child(1){
+                    margin-left: 20px;
+                }
+
+               
+            }
+        }
