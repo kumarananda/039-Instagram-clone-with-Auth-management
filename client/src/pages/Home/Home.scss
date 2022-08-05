@@ -25,7 +25,7 @@
 
     
     .post-aria-box,.suggestion-aria-box {
-        .header-space-div{ margin-top: 60px;}
+        .header-space-div{ margin-top: 70px;}
     }
     .post-aria-box {
         margin-top: 10px;
@@ -41,9 +41,47 @@
         margin-top: 10px;
         width: 320px;
         height: 300px;
-        background-color: rgb(95, 87, 44);
+        border: 1px solid rgba(219, 219, 219, 1);
 
+        .user-control-box {
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
 
+            .user-img{
+                margin-right: 8px;
+                // width: 50px;
+                img{
+                    height: 50px;
+                    width:  50px;
+                    border-radius: 50%;
+                }
+
+            }
+            .user-data {
+                width: 100%;
+                text-align-last: left;
+
+                .user-name {
+
+                    span {
+                        font-size: 12px;
+                        font-weight: 600;
+                    }
+                }
+                .user-full-name {
+                    
+                    span {
+                        
+                        font-size: 13px;
+                        font-weight: 400;
+                        color: #707070;
+
+                    }
+                }
+            }
+        }
 
     }
 }

@@ -4,6 +4,7 @@ import './Home.scss'
 import userImg from '../../components/Header/tempImg/293868842_442013060903697_3099029517532529372_n.jpg'
 import FlowingUsers from '../../components/FlowingUsers/FlowingUsers'
 import PostBox from '../../components/PostBox/PostBox'
+import FlowerSuggestions from '../../components/FlowerSuggestions/FlowerSuggestions'
 
 
 const Home = () => {
@@ -31,7 +32,27 @@ const Home = () => {
 
         <div className="suggestion-aria-box">
           <div className="header-space-div"></div>
-            
+
+          <div className="user-control-box">
+            <div className="user-img">
+              <img src={userImg} alt="" />
+            </div>
+            <div className="user-data">
+              <div className="user-name">
+                <span>ananda484</span>
+              </div>
+              <div className="user-full-name">
+                <span>Ananda Kumar Saha</span>
+              </div>
+            </div>
+            <div className="account-switch">
+              <span><a href="#">Switch</a> </span>
+            </div>
+          </div>
+          <div className="flower-Suggestions">
+            <FlowerSuggestions/>
+          </div>
+
         </div>
       </div>
       <div className="site-footer">
