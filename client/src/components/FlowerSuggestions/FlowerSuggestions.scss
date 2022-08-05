@@ -6,6 +6,12 @@
         display: flex;
         justify-content: space-between;
 
+        .header-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #707070;
+
+        }
         span{
             a{
                 color: black;
@@ -15,8 +21,50 @@
     }
 
     .Suggestions-data {
+        padding: 5px 20px 5px 5px;
 
-        // hare
+        
+        
+        .Suggestions {
+            padding: 5px 0;
+            height: 55px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            // background-color: red;
+            .img-box {
+                margin-right: 10px;
+
+                a { 
+             
+                    .img {
+                        width: 35px;
+                        height: 35px;
+                        border-radius: 50%;
+
+                    }
+                }
+            }
+            .text-data-box {
+                width: 100%;
+                .user-name {
+                    a{
+                        color: black;
+                        font-size: 11px;
+                        font-weight: 700;
+                    }
+                }
+                .user-mess{
+                    font-size: 12px;
+                    font-weight: 400;
+                    color: #707070;
+                }
+
+            }
+            .following-btn {
+
+            }
+        }
         
 
 

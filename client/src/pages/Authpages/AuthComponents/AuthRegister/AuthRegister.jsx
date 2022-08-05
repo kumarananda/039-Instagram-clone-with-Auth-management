@@ -6,10 +6,48 @@ import authlogo from '../../AuthImges/authlogo.png'
 import appleStore from '../../AuthImges/apple-store.png'
 import playStore from '../../AuthImges/play-store.png'
 import {AiFillFacebook} from 'react-icons/ai'
+import { useState } from 'react'
+import swl from 'sweetalert'
 
 
 
 const AuthRegister = () => {
+
+  // state for form fild
+  const [input, setInput] = useState({
+    email : '',
+    name : "",
+    username : "",
+    password : ""
+
+  })
+  // console.log(input);
+
+
+  // handle Input data
+  const handleInput = (e) => {
+    // setInput({...input, [e.target.name] : e.target.value})
+    setInput( (prev) => ({...prev, [e.target.name] : e.target.value}))
+  }
+
+  const handleUserRegister = (e) => {
+    e.preventDefault();
+
+    try {
+
+      if(!input.name || !input.email || !input.username || !input.password ){
+        // alert('all filed are require')
+        swl('Danger', 'all filds are require', 'error')
+      }else{
+
+      }
+      
+
+    }catch(error) {
+      console.log(error);
+    }
+  }
+
   return (
     <>
       <div className="auth-container-content">
@@ -35,23 +73,41 @@ const AuthRegister = () => {
           </div>
 
           <div className="input-form">
-            <form action="#">
-              <div className="inp-box">
+            <form onSubmit={handleUserRegister} action="#">
+              {/* <div className="inp-box">
                 <label className='inp-box-lavel'>
                   <span  className='box-lavel cont-lavel '>Mobile Number or Email</span>
                   <input placeholder='Mobile Number or Email' className='box-input cont-input' name='emailorphone' type="text" />
                 </label>
-              </div>
+              </div> */}
               <div className="inp-box2">
                 <label className='inp-box-lavel'>
                   <span  className='box-lavel cont-lavel '>Mobile Number or Email</span>
-                  <input placeholder='' className='box-input cont-input' name='emailorphone' type="text" />
+                  <input value={input.email} placeholder='' onChange={handleInput} className='box-input cont-input' name='email' type="text" />
+                </label>
+              </div>
+              <div className="inp-box2">
+                <label className='inp-box-lavel'>
+                  <span  className='box-lavel cont-lavel '>Full Name</span>
+                  <input value={input.name} placeholder='' onChange={handleInput} className='box-input cont-input' name='name' type="text" />
+                </label>
+              </div>
+              <div className="inp-box2">
+                <label className='inp-box-lavel'>
+                  <span  className='box-lavel cont-lavel '>User Name</span>
+                  <input value={input.username} placeholder='' onChange={handleInput} className='box-input cont-input' name='username' type="text" />
+                </label>
+              </div>
+              <div className="inp-box2">
+                <label className='inp-box-lavel'>
+                  <span  className='box-lavel cont-lavel '>Password</span>
+                  <input value={input.password} placeholder='' onChange={handleInput} className='box-input cont-input' name='password' type="password" />
                 </label>
               </div>
               {/* <input type="text" placeholder='Mobile Number or Email'/> */}
-              <input type="text" placeholder='Full Name'/>
-              <input type="text" placeholder='Username'/>
-              <input type="text" placeholder='Password'/>
+              {/* <input type="text" placeholder='Full Name'/> */}
+              {/* <input type="text" placeholder='Username'/> */}
+              {/* <input type="text" placeholder='Password'/> */}
 
               <p className='sign-up-msg'>
                 People who use our service may have uploaded your contact information to Instagram. <a href="#">Learn More</a> <br /><br /> {/*<div className='space-br' /> <div className='space-br' />*/}

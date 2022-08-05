@@ -10,11 +10,11 @@ const Register = () => {
     <>
       <div className="auth-page">
         <div className="auth-main-cont">
-          {/* <div className="auth-slider">
+          <div className="auth-slider">
             <div className="slider-box">
               <AuthSlide/>
             </div>
-          </div> */}
+          </div>
           <div className="auth-content">
             <AuthRegister/>
           </div>

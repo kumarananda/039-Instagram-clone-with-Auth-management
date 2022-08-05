@@ -157,7 +157,7 @@ const PostBox = () => {
 
                         </div>
                         <div className="post-text">
-                            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Consectetur nesciunt, repudiandae at non sunt quasi eum sit c
+                            <a href="#">ananda484</a> Lorem ipsum dolor sit amet consectetur, adipisicing elit. Consectetur nesciunt, repudiandae at non sunt quasi eum sit c
                         </div>
                         <div className="view-comments">
                             <a>view all comments</a>

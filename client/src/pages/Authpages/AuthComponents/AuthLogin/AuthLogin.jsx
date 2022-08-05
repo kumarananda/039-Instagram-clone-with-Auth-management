@@ -7,10 +7,20 @@ import appleStore from '../../AuthImges/apple-store.png'
 import playStore from '../../AuthImges/play-store.png'
 import {AiFillFacebook} from 'react-icons/ai'
 import './Login.scss'
+import { useState } from 'react'
 
 
 
 const AuthLogin = () => {
+
+
+  const [input, setInput] = useState({
+      name : '',
+      email : '',
+      pass : ''
+  })
+
+
   return (
     <>
       <div className="auth-container-content">
@@ -31,6 +41,18 @@ const AuthLogin = () => {
                 <label className='inp-box-lavel'>
                   <span  className='box-lavel cont-lavel '>Mobile Number or Email</span>
                   <input placeholder='Mobile Number or Email' className='box-input cont-input' name='emailorphone' type="text" />
+                </label>
+              </div>
+              <div className="inp-box2">
+                <label className='inp-box-lavel'>
+                  <span  className='box-lavel cont-lavel '>Mobile Number or Email</span>
+                  <input placeholder='' className='box-input cont-input' name='emailorphone' type="text" />
+                </label>
+              </div>
+              <div className="inp-box2">
+                <label className='inp-box-lavel'>
+                  <span  className='box-lavel cont-lavel '>Mobile Number or Email</span>
+                  <input placeholder='' className='box-input cont-input' name='emailorphone' type="text" />
                 </label>
               </div>
               <div className="inp-box2">
