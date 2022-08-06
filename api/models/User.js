@@ -5,7 +5,7 @@ const userSchema = mongoose.Schema({
 
     name : {
         type : String,
-        required : true,
+        // required : true,
         trim : true
     },
     email : {
@@ -15,8 +15,8 @@ const userSchema = mongoose.Schema({
     },
     cell : {
         type : String,
-        required : true,
-        unique :true,
+        // required : true,
+        // unique :true,
         trim : true
     },
     username : {
@@ -32,11 +32,11 @@ const userSchema = mongoose.Schema({
     },
     age : {
         type : Number,
-        required : true,
+        // required : true,
     },
     gender : {
         type : String,
-        required : true,
+        // required : true,
     },
     photo : {
         type : String,
