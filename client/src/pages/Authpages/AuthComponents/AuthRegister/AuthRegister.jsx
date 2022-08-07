@@ -21,13 +21,21 @@ const AuthRegister = () => {
     password : ""
 
   })
-  // console.log(input);
+  console.log(input);
+  // input aria controle
+  let nameLAct = ""; let nameIAct = ""
+  if(input.name){
+    nameLAct = "cont-lavel" ; nameIAct = "cont-input"
+  }
+
+
 
 
   // handle Input data
   const handleInput = (e) => {
     // setInput({...input, [e.target.name] : e.target.value})
-    setInput( (prev) => ({...prev, [e.target.name] : e.target.value}))
+    setInput( (prev) => ({...prev, [e.target.name] : e.target.value}));
+
   }
 
   const handleUserRegister = (e) => {
@@ -74,36 +82,36 @@ const AuthRegister = () => {
 
           <div className="input-form">
             <form onSubmit={handleUserRegister} action="#">
-              {/* <div className="inp-box">
+              <div className="inp-box">
+                
+                  <label htmlFor='name_fild'  className=' cont-lavel '>Mobile Number or Email</label>
+                  <input id='name_fild' className='box-input cont-input' name='emailorphone' type="text" />
+                
+              </div>
+              {/* <div className="inp-box2">
                 <label className='inp-box-lavel'>
                   <span  className='box-lavel cont-lavel '>Mobile Number or Email</span>
-                  <input placeholder='Mobile Number or Email' className='box-input cont-input' name='emailorphone' type="text" />
-                </label>
-              </div> */}
-              <div className="inp-box2">
-                <label className='inp-box-lavel'>
-                  <span  className='box-lavel cont-lavel '>Mobile Number or Email</span>
-                  <input value={input.email} placeholder='' onChange={handleInput} className='box-input cont-input' name='email' type="text" />
+                  <input value={input.email}  onChange={handleInput} className='box-input cont-input' name='email' type="text" />
                 </label>
               </div>
               <div className="inp-box2">
                 <label className='inp-box-lavel'>
-                  <span  className='box-lavel cont-lavel '>Full Name</span>
-                  <input value={input.name} placeholder='' onChange={handleInput} className='box-input cont-input' name='name' type="text" />
+                  <span  className={nameLAct} >Full Name</span>
+                  <input value={input.name}  onChange={handleInput} className={nameIAct} name='name' type="text" />
                 </label>
               </div>
               <div className="inp-box2">
                 <label className='inp-box-lavel'>
                   <span  className='box-lavel cont-lavel '>User Name</span>
-                  <input value={input.username} placeholder='' onChange={handleInput} className='box-input cont-input' name='username' type="text" />
+                  <input value={input.username}  onChange={handleInput} className='box-input cont-input' name='username' type="text" />
                 </label>
               </div>
               <div className="inp-box2">
                 <label className='inp-box-lavel'>
                   <span  className='box-lavel cont-lavel '>Password</span>
-                  <input value={input.password} placeholder='' onChange={handleInput} className='box-input cont-input' name='password' type="password" />
+                  <input value={input.password}  onChange={handleInput} className='cont-input' name='password' type="text" />
                 </label>
-              </div>
+              </div> */}
               {/* <input type="text" placeholder='Mobile Number or Email'/> */}
               {/* <input type="text" placeholder='Full Name'/> */}
               {/* <input type="text" placeholder='Username'/> */}

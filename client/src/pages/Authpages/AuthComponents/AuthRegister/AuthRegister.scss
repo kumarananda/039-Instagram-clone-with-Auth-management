@@ -116,40 +116,41 @@
                     border: 1px solid #dbdbdb;
                     border-radius: 3px;
                     text-align: left;
-                    line-height: 36px;
+                    height: 38px;
                     position: relative;
                     margin-bottom: 6px;
                     background-color: rgb(250, 250, 250);
 
-                    .inp-box-lavel {
+                    
 
-                        .box-lavel {
+                        label {
                             padding: 0 5px;
                             position: absolute;
+                            font-size: 14px;
 
                         }
-                        .cont-lavel {
-                            
-                            top: -11px;
-                            font-size: 10px;
-                        }
+                        // .cont-lavel {
+                        //     top: -2px;
+                        //     font-size: 10px;
+                        // }
                         input{
                             margin-bottom: 0;
                             background: transparent;
                             outline: none; 
                             border: none;
-                        }
-                        .box-input {
                             line-height: 0px;
                             padding: 0 5px;
-                            
+                            &:focus{
+                                outline: none; 
+                                border: none;
+                            }
+                        }
 
-                        }
-                        .cont-input {
-                            position: absolute;
-                            bottom: 4px;
-                        }
-                    }
+                        // .cont-input {
+                        //     position: absolute;
+                        //     bottom: 4px;
+                        // }
+                    
 
                 }
                 // test
@@ -157,18 +158,19 @@
                     border: 1px solid #dbdbdb;
                     border-radius: 3px;
                     text-align: left;
-                    line-height: 36px;
+                    line-height: 38px;
                     position: relative;
                     margin-bottom: 6px;
                     background-color: rgb(250, 250, 250);
 
                     .inp-box-lavel {
 
-                        .box-lavel {
+                        label {
                             padding: 0 5px;
                             position: absolute;
                             font-size: 12px;
                             top: 0px;
+
                             
 
                         }
@@ -176,6 +178,7 @@
 
                             top: -11px;
                             font-size: 10px;
+                            height: 100%;
                         }
 
                         input{
@@ -183,17 +186,22 @@
                             background: transparent;
                             outline: none; 
                             border: none;
-                        }
-
-
-                        .box-input {
                             position: absolute;
                             bottom: 8px;
                             line-height: 0px;
                             padding: 0 5px;
+                            width: 100px;
+                        }
+
+
+                        // .box-input {
+                        //     position: absolute;
+                        //     bottom: 8px;
+                        //     line-height: 0px;
+                        //     padding: 0 5px;
                             
 
-                        }
+                        // }
                         .cont-input {
                             bottom: 4px;
                         }
