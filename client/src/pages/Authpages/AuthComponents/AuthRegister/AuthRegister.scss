@@ -123,33 +123,43 @@
 
                     
 
-                        label {
-                            padding: 0 5px;
-                            position: absolute;
-                            font-size: 14px;
+                    label {
+                        padding: 0 5px;
+                        position: absolute;
+                        top: 8px;
+                        font-size: 14px;
+                        transition: .3s;
 
-                        }
-                        // .cont-lavel {
-                        //     top: -2px;
-                        //     font-size: 10px;
-                        // }
-                        input{
-                            margin-bottom: 0;
-                            background: transparent;
+                    }
+                    
+                    input{
+                        margin-bottom: 0;
+                        position: absolute;
+                        bottom: 7px;
+                        line-height: 18px;
+                        font-size: 14px;
+                        background: transparent;
+                        outline: none; 
+                        border: none;
+                        transition: .3s;
+
+                        
+                        &:focus{
                             outline: none; 
                             border: none;
-                            line-height: 0px;
-                            padding: 0 5px;
-                            &:focus{
-                                outline: none; 
-                                border: none;
-                            }
                         }
+                    }
+                    .cont-lavel {
+                        top: 1px;
+                        font-size: 10px;
+                    }
 
-                        // .cont-input {
-                        //     position: absolute;
-                        //     bottom: 4px;
-                        // }
+                    .cont-input {
+                        bottom: 2px;
+                        font-size: 16px;
+                        line-height: 16px;
+                    }
+
                     
 
                 }

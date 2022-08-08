@@ -4,6 +4,7 @@ import Login from "./pages/Authpages/Login";
 import Profile from "./pages/Profile/Profile";
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.scss'
+import './defult.css'
 import Register from "./pages/Authpages/Register";
 
 function App() {
