@@ -19,7 +19,7 @@ const AuthRegister = () => {
 
   // create a tost
   const creatToast = (msg) => {
-    return toast(msg)
+    return toast.warn(msg)
   }
 
   // state for form fild
