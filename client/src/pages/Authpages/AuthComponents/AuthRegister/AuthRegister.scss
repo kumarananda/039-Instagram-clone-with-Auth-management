@@ -2,7 +2,6 @@
 
 .auth-container-content {
     
-
     .auth-form-box {
         padding-left: 40px;
         padding-right: 40px;
@@ -128,7 +127,7 @@
                         position: absolute;
                         top: 8px;
                         font-size: 14px;
-                        transition: .3s;
+                        transition: .1s;
 
                     }
                     
@@ -138,10 +137,12 @@
                         bottom: 7px;
                         line-height: 18px;
                         font-size: 14px;
-                        background: transparent;
+                        background-color: transparent;
                         outline: none; 
                         border: none;
-                        transition: .3s;
+                        transition: .1s;
+                        padding: 0 5px;
+                        width: 100%;
 
                         
                         &:focus{
@@ -155,7 +156,7 @@
                     }
 
                     .cont-input {
-                        bottom: 2px;
+                        bottom: 1px;
                         font-size: 16px;
                         line-height: 16px;
                     }

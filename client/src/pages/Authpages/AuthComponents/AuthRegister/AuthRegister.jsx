@@ -1,6 +1,7 @@
 
 import React from 'react'
 import {Link} from 'react-router-dom'
+import axios from 'axios'
 import './AuthRegister.scss'
 import authlogo from '../../AuthImges/authlogo.png'
 import appleStore from '../../AuthImges/apple-store.png'
@@ -20,6 +21,9 @@ const AuthRegister = () => {
   // create a tost
   const creatToast = (msg) => {
     return toast.warn(msg)
+  }
+  const creatToastSucc = (msg) => {
+    return toast(msg)
   }
 
   // state for form fild
@@ -64,6 +68,18 @@ const AuthRegister = () => {
         // swl('Danger', 'all filds are require', 'error')
         creatToast('All filds are required')
       }else{
+        axios.post('http://localhost:5050/api/user/register', input)
+        .then(res => {
+          setInput((prev) => ({
+            email : '',
+            name : "",
+            username : "",
+            password : ""
+          }))
+
+          creatToastSucc('Data Post Succfuly');
+          
+        })
 
       }
       
