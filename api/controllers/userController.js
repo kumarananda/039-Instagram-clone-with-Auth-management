@@ -178,6 +178,8 @@ export const  editUser = async (req, res, next) => {
 
     // get body data
     const { data, email, username} = req.body;
+    console.log(req.body);
+    console.log(data);
 
     try {
 

@@ -156,9 +156,9 @@
                     }
 
                     .cont-input {
-                        bottom: 1px;
-                        font-size: 16px;
-                        line-height: 16px;
+                        bottom: 2px;
+                        font-size: 15px;
+                        line-height: 15px;
                     }
 
                     
@@ -175,9 +175,10 @@
                     background-color: #0095f6;
                     border: 1px solid transparent;
                     border-radius: 4px;
-                    padding: 4px 0;
+                    padding: 4px 10px;
                     color: #fff;
                     margin-bottom: 0;
+                    width: 100%;
                 }
 
                 p.sign-up-msg {

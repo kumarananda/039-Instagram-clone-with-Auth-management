@@ -8,10 +8,8 @@ import appleStore from '../../AuthImges/apple-store.png'
 import playStore from '../../AuthImges/play-store.png'
 import {AiFillFacebook} from 'react-icons/ai'
 import { useState } from 'react'
-import swl from 'sweetalert'
-// import { ToastContainer, toast } from 'react-toastify';
+import swla from 'sweetalert'
 import { ToastContainer, toast } from 'react-toastify';
-// import 'react-toastify/dist/react-toastify.css'
 import 'react-toastify/dist/ReactToastify.css';
 
 
@@ -65,7 +63,7 @@ const AuthRegister = () => {
 
       if(!input.name || !input.email || !input.username || !input.password ){
         // alert('all filed are require')
-        // swl('Danger', 'all filds are require', 'error')
+        // swla('Danger', 'all filds are require', 'error')
         creatToast('All filds are required')
       }else{
         axios.post('http://localhost:5050/api/user/register', input)
@@ -77,9 +75,11 @@ const AuthRegister = () => {
             password : ""
           }))
 
-          creatToastSucc('Data Post Succfuly');
+          // creatToastSucc('Data Post Succfuly');
+          swla("Success", 'Your account created successffully ', "success")
           
         })
+
 
       }
       
