@@ -177,21 +177,22 @@ export const  editUser = async (req, res, next) => {
  export const  userLogin = async (req, res, next) => {
 
     // get body data
-    const { data, email, username} = req.body;
-    console.log(req.body);
-    console.log(data);
+    const { auth, email, username} = req.body;
+    // console.log(req.body);
+    // console.log(data);
 
     try {
 
         // find user by email , username, cell any type of data 01
         //more standerd from 02 ***
 
-        const login_useremail = await User.findOne({email : data});
-        const login_username = await User.findOne({username : data});
-        const login_usercell = await User.findOne({cell : data});
+        const login_useremail = await User.findOne({email : auth});
+        const login_username = await User.findOne({username : auth});
+        const login_usercell = await User.findOne({cell : auth});
         
         const login_user = login_useremail ? login_useremail : (login_username ? login_username : login_usercell );
         
+        console.log(login_user);
 
         {
 

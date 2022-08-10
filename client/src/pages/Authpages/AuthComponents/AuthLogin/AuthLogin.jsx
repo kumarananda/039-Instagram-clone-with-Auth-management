@@ -59,16 +59,16 @@ const AuthLogin = () => {
           // creatToast('All filds are required')
         }else{
 
-          await axios.post('http://localhost:5050/api/user/login', {email : input.auth, password : input.password})
+          await axios.post('http://localhost:5050/api/user/login', {auth : input.auth, password : input.password})
           .then(res => {
 
             cookie.set('token', res.data.token);
-            cookie.set('user', res.data.user);
+            cookie.set('user', JSON.stringify(res.data.user));
 
-            navigate('/')
+            navigate('/');
 
-
-            console.log(res.data);
+            // console.log(res.data );
+            // console.log(res.user );
           })
         }
 
