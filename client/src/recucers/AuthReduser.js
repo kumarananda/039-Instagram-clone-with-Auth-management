@@ -4,13 +4,16 @@
 const AuthReduser = (authstate, {type, payload}) => {
 
     switch (type) {
-        case '':
-            
+        case 'LOGIN_USER':
+            return {
+                token : payload.token,
+                user : payload.user
+            }
             break;
     
         default:
             return authstate;
-            break;
+            // break;
     }
 }
 

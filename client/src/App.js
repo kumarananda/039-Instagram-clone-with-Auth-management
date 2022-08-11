@@ -6,15 +6,17 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.scss'
 import './defult.css'
 import Register from "./pages/Authpages/Register";
+import AuthenticateUser from "./middlewares/AuthenticateUser";
+import AuthRedirectUser from "./middlewares/AuthRedirectUser";
 
 function App() {
   return (
     <>
       <Routes>
-        <Route path="/login" element={ <Login /> }/>
-        <Route path="/register" element={ <Register /> }/>
+        <Route path="/login" element={ <AuthRedirectUser> <Login /> </AuthRedirectUser>  }/>
+        <Route path="/register" element={ <AuthRedirectUser>  <Register /> </AuthRedirectUser>  }/>
         <Route path="/:id" element={ <Profile /> }/>
-        <Route path="/" element={ <Home /> }/>
+        <Route path="/" element={ <AuthenticateUser> <Home /> </AuthenticateUser>  }/>
       </Routes>
     </>
   );

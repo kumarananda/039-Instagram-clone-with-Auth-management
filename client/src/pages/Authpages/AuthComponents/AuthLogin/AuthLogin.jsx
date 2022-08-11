@@ -13,11 +13,16 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios'
 import cookie from 'js-cookie'
+import { useContext } from 'react'
+import AuthContext from '../../../../context/authContext'
 
 
 
 
 const AuthLogin = () => {
+
+  // use contex
+  const { authdispatch } = useContext(AuthContext)
 
   // use navigate 
   const navigate = useNavigate();
@@ -64,11 +69,10 @@ const AuthLogin = () => {
 
             cookie.set('token', res.data.token);
             cookie.set('user', JSON.stringify(res.data.user));
-
+            // update data 
+            authdispatch({type : 'LOGIN_USER', payload : res.data})
             navigate('/');
 
-            // console.log(res.data );
-            // console.log(res.user );
           })
         }
 
