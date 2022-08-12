@@ -14,7 +14,9 @@ import AuthContext from '../../context/authContext'
 const Home = () => {
 
   // use context
-  const {authdispatch} = useContext(AuthContext);
+  const {authdispatch, user} = useContext(AuthContext);
+  // console.log(authstate.user);
+  console.log(user);
 
   //use navigate
   const navigate = useNavigate();
@@ -61,14 +63,14 @@ const Home = () => {
 
           <div className="user-control-box">
             <div className="user-img">
-              <img src={userImg} alt="" />
+              <img src={`${user.img ? user.img : 'https://www.w3schools.com/howto/img_avatar.png'}`} alt="" />
             </div>
             <div className="user-data">
               <div className="user-name">
-                <span>ananda484</span>
+                <span>{user.username}</span>
               </div>
               <div className="user-full-name">
-                <span>Ananda Kumar Saha</span>
+                <span>{user.name}</span>
               </div>
               <div className="log-out-btn">
                 <a onClick={handleUserLogout} href="#">Log Out</a>

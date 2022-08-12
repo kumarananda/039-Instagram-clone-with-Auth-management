@@ -7,8 +7,8 @@ import AuthContext from "../context/authContext"
 // create Authenticate
 const AuthRedirectUser = ({children}) => {
 
-    const { token } = useContext(AuthContext)
-    return token ? <Navigate to='/' /> : children ;
+    const { isUserLogin } = useContext(AuthContext)
+    return isUserLogin ? <Navigate to='/' /> : children ;
 }
 
 export default AuthRedirectUser

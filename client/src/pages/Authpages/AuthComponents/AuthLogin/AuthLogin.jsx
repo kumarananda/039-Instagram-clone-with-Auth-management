@@ -35,7 +35,7 @@ const AuthLogin = () => {
     auth : '',
     password : ""
   });
-  console.log(input);
+  // console.log(input);
 
   //  input design con
   const inpDcon = {
@@ -53,7 +53,10 @@ const AuthLogin = () => {
     }
 
     // use contex
-    const { authdispatch } = useContext(AuthContext)
+    const { authdispatch , authstate} = useContext(AuthContext)
+    
+    
+    
     
 
     // handle user login 
@@ -70,9 +73,9 @@ const AuthLogin = () => {
           .then(res => {
 
             cookie.set('token', res.data.token);
-            cookie.set('user', JSON.stringify(res.data.user));
+            // console.log(res.data.user);
             // update data 
-            authdispatch({type : 'LOGIN_USER', payload : res.data})
+            authdispatch({type : 'LOGIN_USER_SUCCESS', payload : res.data.user})
             navigate('/');
 
           })

@@ -1,13 +1,13 @@
 import AuthContext from "../context/authContext"
-import  cookie from 'js-cookie'
+// import  cookie from 'js-cookie'
 import { useReducer } from "react"
 import AuthReduser from "../recucers/AuthReduser"
 
 
 // inatial state
 export const INITAL_STATE = {
-  token : cookie.get('token') || null,
-  user : cookie.get('user') ? JSON.parse(cookie.get('user')) : null 
+  isUserLogin : false,
+  user : {}
 }
 
 // create provider
@@ -15,12 +15,15 @@ const AuthcontextProvider = ({children}) => {
 
   const [authstate, authdispatch] = useReducer(AuthReduser, INITAL_STATE)
 
+  // console.log(authstate);
+
   return (
     <AuthContext.Provider 
         value={{
-            token : authstate.token,
-            user : authstate.user,
-            authdispatch 
+          isUserLogin : authstate.isUserLogin ,
+          user : authstate.user,
+          authdispatch ,
+          authstate
         }}
     >
         {children}

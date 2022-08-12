@@ -192,7 +192,7 @@ export const  editUser = async (req, res, next) => {
         
         const login_user = login_useremail ? login_useremail : (login_username ? login_username : login_usercell );
         
-        console.log(login_user);
+        // console.log(login_user);
 
         {
 
@@ -285,4 +285,58 @@ export const  editUser = async (req, res, next) => {
         // next(createError(404, "coustomly error"))
     }
     
+}
+
+
+/**
+ * @access public
+ * @route /api/user/me
+ * @method get 
+ */
+export const getLogedInUser = async (req, res, next) => {
+
+    try{
+
+        // Bearer Token check
+        const bearer_token = req.headers.authorization;
+
+        //get token
+        let token = '';
+        if(bearer_token){
+            token = req.headers.authorization.split(' ')[1];
+
+            // get token user
+            const logedInUser = jwt.verify(token, process.env.JWT_SECRET);
+
+            // if token not veriffy
+            if(!logedInUser){
+                // next(createError(404, 'Token Not Valid'));
+                res.send('Token Not Valid')
+            }
+            // if token veriffy
+            if(logedInUser){
+                const user= await User.findById(logedInUser.id)
+                res.status(200).json(user)
+            }
+
+            
+        }
+        
+
+        // check token
+        if(!bearer_token){
+            next(createError(404, 'Token Not Found'));
+            
+        }
+
+
+        // res.send(bearer_token)
+        
+
+    }catch(error){
+        // next(createError(400, {msg : "faild", error}))
+        next(error)
+    }
+
+
 }
