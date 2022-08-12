@@ -8,9 +8,14 @@ import './Header.scss'
 import pro_img from "./tempImg/293868842_442013060903697_3099029517532529372_n.jpg"
 import { FiSearch } from "react-icons/fi";
 import { FiXCircle } from "react-icons/fi";
+import { useContext } from 'react'
+import AuthContext from '../../context/authContext'
 
 
 const Header = () => {
+    // use context
+    const {user} = useContext(AuthContext)
+    
   return (
     <>
         <nav className='header'>
@@ -58,7 +63,7 @@ const Header = () => {
                     <div className="right-items">
                         <a href="#">
                             <div className="por-img">
-                                <img src={pro_img} alt="" />
+                            <img src={`${user.img ? user.img : 'https://www.w3schools.com/howto/img_avatar.png'}`} alt="" />
                             </div>
                         </a>
                     </div>
