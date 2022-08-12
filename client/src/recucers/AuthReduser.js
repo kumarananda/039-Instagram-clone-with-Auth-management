@@ -9,7 +9,12 @@ const AuthReduser = (authstate, {type, payload}) => {
                 token : payload.token,
                 user : payload.user
             }
-            break;
+        case 'USER_LOGOUT':
+            return {
+                token : null,
+                user : null
+            }
+            // break;
     
         default:
             return authstate;

@@ -21,8 +21,6 @@ import AuthContext from '../../../../context/authContext'
 
 const AuthLogin = () => {
 
-  // use contex
-  const { authdispatch } = useContext(AuthContext)
 
   // use navigate 
   const navigate = useNavigate();
@@ -53,6 +51,10 @@ const AuthLogin = () => {
       setInput( (prev) => ({...prev, [e.target.name] : e.target.value}));
   
     }
+
+    // use contex
+    const { authdispatch } = useContext(AuthContext)
+    
 
     // handle user login 
     const handleUserLogin = async  (e) => {

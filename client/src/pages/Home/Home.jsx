@@ -5,9 +5,35 @@ import userImg from '../../components/Header/tempImg/293868842_442013060903697_3
 import FlowingUsers from '../../components/FlowingUsers/FlowingUsers'
 import PostBox from '../../components/PostBox/PostBox'
 import FlowerSuggestions from '../../components/FlowerSuggestions/FlowerSuggestions'
+import Cookies from 'js-cookie'
+import { useNavigate } from 'react-router-dom'
+import { useContext } from 'react'
+import AuthContext from '../../context/authContext'
 
 
 const Home = () => {
+
+  // use context
+  const {authdispatch} = useContext(AuthContext);
+
+  //use navigate
+  const navigate = useNavigate();
+
+
+  //handle user logout
+  const handleUserLogout = (e)  => {
+    e.preventDefault();
+
+    Cookies.remove('token');
+    Cookies.remove('user');
+
+    authdispatch({type : 'USER_LOGOUT'})
+
+    navigate('/login')
+
+  }
+
+
   return (
     <>
       <div className="site-header">
@@ -43,6 +69,9 @@ const Home = () => {
               </div>
               <div className="user-full-name">
                 <span>Ananda Kumar Saha</span>
+              </div>
+              <div className="log-out-btn">
+                <a onClick={handleUserLogout} href="#">Log Out</a>
               </div>
             </div>
             <div className="account-switch">

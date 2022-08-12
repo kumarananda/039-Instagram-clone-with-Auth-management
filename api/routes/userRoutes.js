@@ -16,6 +16,7 @@ router.route('/:id').get(userMeddleware, getSingleUser).delete(userMeddleware, d
 // user Auth route
 router.post('/login', userLogin)
 router.post('/register', userRegister)
+router.get('/me', userRegister)
 
 // export router
 export default router;
