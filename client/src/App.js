@@ -12,6 +12,7 @@ import Cookies from "js-cookie";
 import { useContext, useEffect } from "react";
 import axios from "axios";
 import AuthContext from "./context/authContext";
+import LoadingBar from 'react-top-loading-bar'
 
 function App() {
 
@@ -55,6 +56,14 @@ function App() {
 
   return (
     <>
+
+      <LoadingBar
+        color='#f11946'
+        progress={progress}
+        onLoaderFinished={() => setProgress(0)}
+      />
+
+
       <Routes>
         <Route path="/login" element={ <AuthRedirectUser> <Login /> </AuthRedirectUser>  }/>
         <Route path="/register" element={ <AuthRedirectUser>  <Register /> </AuthRedirectUser>  }/>
