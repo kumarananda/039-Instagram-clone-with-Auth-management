@@ -14,9 +14,13 @@ import axios from "axios";
 import AuthContext from "./context/AuthContext";
 import LoadingBar from 'react-top-loading-bar'
 import LoaderContext from "./context/LoaderContext";
+import VerifyPage from "./pages/Authpages/AuthComponents/Verify/VerifyPage";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 function App() {
+
 
   // get token
   const token = Cookies.get('token');
@@ -78,11 +82,13 @@ function App() {
         progress={loaderstate}
         onLoaderFinished={() => loaderDispatch({type : "LODER_END"})}
       />
+      <ToastContainer/>
 
 
       <Routes>
         <Route path="/login" element={ <AuthRedirectUser> <Login /> </AuthRedirectUser>  }/>
         <Route path="/register" element={ <AuthRedirectUser>  <Register /> </AuthRedirectUser>  }/>
+        <Route path="/verify" element={ <VerifyPage /> }/>
         <Route path="/:id" element={ <Profile /> }/>
         <Route path="/" element={ <AuthenticateUser> <Home /> </AuthenticateUser>  }/>
       </Routes>

@@ -9,13 +9,12 @@ import {AiFillFacebook} from 'react-icons/ai'
 import './Login.scss'
 import { useState } from 'react'
 import swla from 'sweetalert'
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios'
 import cookie from 'js-cookie'
-import { useContext } from 'react'
-import AuthContext from '../../../../context/AuthContext'
-import LoaderContext from '../../../../context/LoaderContext'
+import { useContext } from 'react';
+import AuthContext from '../../../../context/AuthContext';
+import LoaderContext from '../../../../context/LoaderContext';
+import { creatToast } from '../../../../utility/toast'
 
 
 
@@ -29,10 +28,7 @@ const AuthLogin = () => {
   // use navigate 
   const navigate = useNavigate();
 
-  // create a tost
-  const creatToast = (msg) => {
-    return toast.warn(msg)
-  }
+
 
   // form filed state
   const [input, setInput] = useState({
@@ -69,19 +65,27 @@ const AuthLogin = () => {
 
       try{
         if(!input.auth || !input.password){
-          swla('Filed Empty', 'All filds are require', 'error')
-          // creatToast('All filds are required')
+          // swla('Filed Empty', 'All filds are require', 'error')
+          creatToast('All filds are required')
         }else{
 
           await axios.post('http://localhost:5050/api/user/login', {auth : input.auth, password : input.password})
           .then(res => {
 
-            cookie.set('token', res.data.token);
-            // console.log(res.data.user);
-            // update data 
-            authdispatch({type : 'LOGIN_USER_SUCCESS', payload : res.data.user})
-            navigate('/');
-            loaderDispatch({type : "LOADER_START"})
+            if(res.data.user.isVerified){
+
+              cookie.set('token', res.data.token);
+              // console.log(res.data.user);
+              // update data 
+              authdispatch({type : 'LOGIN_USER_SUCCESS', payload : res.data.user})
+              navigate('/');
+              loaderDispatch({type : "LOADER_START"})
+              
+            }else {
+              navigate('/verify');
+            }
+
+
 
           })
         }
@@ -98,7 +102,7 @@ const AuthLogin = () => {
   return (
     <>
       <div className="auth-container-content">
-          <ToastContainer/>
+          {/* <ToastContainer/> */}
         <div className="auth-form-box login-form">
 
           <div className="logo-box">
