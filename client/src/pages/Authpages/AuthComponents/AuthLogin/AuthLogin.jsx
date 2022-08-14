@@ -14,13 +14,17 @@ import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios'
 import cookie from 'js-cookie'
 import { useContext } from 'react'
-import AuthContext from '../../../../context/authContext'
+import AuthContext from '../../../../context/AuthContext'
+import LoaderContext from '../../../../context/LoaderContext'
 
 
 
 
 const AuthLogin = () => {
 
+
+  // use loader context 
+  const {loaderDispatch} = useContext(LoaderContext)
 
   // use navigate 
   const navigate = useNavigate();
@@ -77,6 +81,7 @@ const AuthLogin = () => {
             // update data 
             authdispatch({type : 'LOGIN_USER_SUCCESS', payload : res.data.user})
             navigate('/');
+            loaderDispatch({type : "LOADER_START"})
 
           })
         }

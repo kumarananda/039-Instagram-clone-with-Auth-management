@@ -11,8 +11,9 @@ import AuthRedirectUser from "./middlewares/AuthRedirectUser";
 import Cookies from "js-cookie";
 import { useContext, useEffect } from "react";
 import axios from "axios";
-import AuthContext from "./context/authContext";
+import AuthContext from "./context/AuthContext";
 import LoadingBar from 'react-top-loading-bar'
+import LoaderContext from "./context/LoaderContext";
 
 function App() {
 
@@ -20,7 +21,10 @@ function App() {
   const token = Cookies.get('token');
 
   // get auth context
-  const {authdispatch, authstate} = useContext(AuthContext)
+  const {authdispatch, authstate} = useContext(AuthContext);
+
+  // get loder context
+  const {loaderstate, loaderDispatch } = useContext(LoaderContext)
 
   // console.log(authstate.user);
 
@@ -59,8 +63,8 @@ function App() {
 
       <LoadingBar
         color='#f11946'
-        progress={progress}
-        onLoaderFinished={() => setProgress(0)}
+        progress={loaderstate}
+        onLoaderFinished={() => loaderDispatch({type : "LODER_END"})}
       />
 
 

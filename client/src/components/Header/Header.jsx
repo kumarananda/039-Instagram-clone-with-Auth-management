@@ -9,7 +9,7 @@ import pro_img from "./tempImg/293868842_442013060903697_3099029517532529372_n.j
 import { FiSearch } from "react-icons/fi";
 import { FiXCircle } from "react-icons/fi";
 import { useContext } from 'react'
-import AuthContext from '../../context/authContext'
+import AuthContext from '../../context/AuthContext'
 
 
 const Header = () => {

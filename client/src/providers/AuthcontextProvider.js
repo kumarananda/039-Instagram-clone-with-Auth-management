@@ -1,4 +1,4 @@
-import AuthContext from "../context/authContext"
+import AuthContext from "../context/AuthContext"
 // import  cookie from 'js-cookie'
 import { useReducer } from "react"
 import AuthReduser from "../recucers/AuthReduser"

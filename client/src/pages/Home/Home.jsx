@@ -8,15 +8,19 @@ import FlowerSuggestions from '../../components/FlowerSuggestions/FlowerSuggesti
 import Cookies from 'js-cookie'
 import { useNavigate } from 'react-router-dom'
 import { useContext } from 'react'
-import AuthContext from '../../context/authContext'
+import AuthContext from '../../context/AuthContext'
+import LoaderContext from '../../context/LoaderContext'
 
 
 const Home = () => {
 
+  // use loader context 
+  const {loaderDispatch} = useContext(LoaderContext)
+
   // use context
   const {authdispatch, user} = useContext(AuthContext);
   // console.log(authstate.user);
-  console.log(user);
+  // console.log(user);
 
   //use navigate
   const navigate = useNavigate();
@@ -32,6 +36,7 @@ const Home = () => {
     authdispatch({type : 'USER_LOGOUT'})
 
     navigate('/login')
+    loaderDispatch({type : "LOADER_START"})
 
   }
 
