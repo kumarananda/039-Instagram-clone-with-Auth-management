@@ -15,10 +15,12 @@ import AuthContext from "./context/AuthContext";
 import LoadingBar from 'react-top-loading-bar'
 import LoaderContext from "./context/LoaderContext";
 
+
 function App() {
 
   // get token
   const token = Cookies.get('token');
+
 
   // get auth context
   const {authdispatch, authstate} = useContext(AuthContext);
@@ -34,14 +36,24 @@ function App() {
 
     try{ 
 
+      // get token user
       axios.get('http://localhost:5050/api/user/me', {
         headers : {
           "Authorization" : `Bearer ${token}`
         }
       })
       .then(res => {
-        // console.log(res.data);
-        authdispatch({type : 'LOGIN_USER_SUCCESS', payload : res.data})
+        
+        if(res.data.isVerified && token){
+          authdispatch({type : 'LOGIN_USER_SUCCESS', payload : res.data})
+        }else {
+          authdispatch({type : 'USER_LOGOUT'});
+          Cookies.remove('token')
+
+          // working hare
+
+        }
+        
       })
       .catch(error => {
         authdispatch({type : 'USER_LOGOUT'})
