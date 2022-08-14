@@ -1,0 +1,52 @@
+
+.verify-page {
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+
+        .page-cont {
+
+            width: 350px;
+            height: 500px;
+            background-color: rgb(236, 236, 236);
+            border: 1px solid rgba(145, 145, 145, 1);
+            padding: 10px;
+            padding-top: 20px;
+
+            .imge-box {
+                width: 100%;
+                text-align: center;
+
+
+            }
+            .verify-box{
+
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                height: 80%;
+
+
+                .items {
+                    text-align: center;
+                }
+            }
+        }
+}
+
+
+
+
+// .verify-page {
+
+
+
+
+//     .page-cont {
+
+
+
+//     }
+// }
