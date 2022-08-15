@@ -17,6 +17,7 @@ import LoaderContext from "./context/LoaderContext";
 import VerifyPage from "./pages/Authpages/AuthComponents/Verify/VerifyPage";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { creatToast } from "./utility/toast";
 
 
 function App() {
@@ -51,7 +52,8 @@ function App() {
         if(res.data.isVerified && token){
           authdispatch({type : 'LOGIN_USER_SUCCESS', payload : res.data})
         }else {
-          authdispatch({type : 'USER_LOGOUT'});
+          // authdispatch({type : 'USER_LOGOUT'});
+          creatToast("Please verify your account")
           Cookies.remove('token')
 
           // working hare

@@ -2,6 +2,7 @@ import User from "../models/User.js";
 import bcrypt from 'bcryptjs'
 import createError from "./createError.js";
 import jwt from 'jsonwebtoken'
+import { sendEmail } from "../utility/sendEmail.js";
 
 /**
  * @access public
@@ -275,6 +276,9 @@ export const  editUser = async (req, res, next) => {
 
     try {
         const createUser = await User.create({...req.body, password : hash})
+        // mail sending
+        sendEmail(createUser.email, "Instagram Account Created", `Hi ${createUser.name} please verify your account.`, '<p>afddsfsd</p>' )
+
         res.status(200).json(createUser)
     } catch(error){
         

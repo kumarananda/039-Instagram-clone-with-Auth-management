@@ -75,13 +75,21 @@ const AuthLogin = () => {
             if(res.data.user.isVerified){
 
               cookie.set('token', res.data.token);
-              // console.log(res.data.user);
+              console.log(res.data.user.name);
+              // console.log(res.data.user.isVerified);
               // update data 
               authdispatch({type : 'LOGIN_USER_SUCCESS', payload : res.data.user})
               navigate('/');
               loaderDispatch({type : "LOADER_START"})
               
             }else {
+              // console.log(res.data.user);
+              // console.log(authstate.user);
+              // console.log("authstate");
+              // creatToast('Please verify your account')
+              
+              authdispatch({type : 'USER_ACC_VERIFY', payload : res.data.user})
+
               navigate('/verify');
             }
 
