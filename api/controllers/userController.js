@@ -3,6 +3,8 @@ import bcrypt from 'bcryptjs'
 import createError from "./createError.js";
 import jwt from 'jsonwebtoken'
 import { sendEmail } from "../utility/sendEmail.js";
+import { sendSms_B, sendSms_V } from "../utility/sendSms.js";
+import { createToken } from "../utility/createToken.js";
 
 /**
  * @access public
@@ -276,8 +278,17 @@ export const  editUser = async (req, res, next) => {
 
     try {
         const createUser = await User.create({...req.body, password : hash})
+
+        const token = createToken({id : createUser._id});
+        const verify_link = `http://localhost:3000/user/${createUser._id}/verify/${token}`;
+        sendEmail(createUser.email, "Instagram Verification", `Hi ${createUser.name} please verify your account.`, `<p>${verify_link}</p>` )
+        
+
         // mail sending
-        sendEmail(createUser.email, "Instagram Account Created", `Hi ${createUser.name} please verify your account.`, '<p>afddsfsd</p>' )
+        // sendEmail(createUser.email, "Instagram Account Verification", `Hi ${createUser.name} please verify your account.`, '<p>afddsfsd</p>' )
+        // sms sending
+        // sendSms_V()  // meuted for free account limite
+        // sendSms_B('01647544959', `Hi ${createUser.name}, Your account is created, Please Verify now`)
 
         res.status(200).json(createUser)
     } catch(error){

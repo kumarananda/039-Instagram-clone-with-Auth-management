@@ -90,8 +90,8 @@ function App() {
       <Routes>
         <Route path="/login" element={ <AuthRedirectUser> <Login /> </AuthRedirectUser>  }/>
         <Route path="/register" element={ <AuthRedirectUser>  <Register /> </AuthRedirectUser>  }/>
-        <Route path="/verify" element={ <VerifyPage /> }/>
-        <Route path="/:id" element={ <Profile /> }/>
+        <Route path="/user/:id/verify/:token" element={ <VerifyPage /> }/>
+        <Route path="/:id" element={ <AuthenticateUser> <Profile /> </AuthenticateUser> }/>
         <Route path="/" element={ <AuthenticateUser> <Home /> </AuthenticateUser>  }/>
       </Routes>
     </>
