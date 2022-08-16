@@ -45,9 +45,7 @@
       "last 1 safari version"
     ]
   },
-  "forMyNote" :
-  {
-    "react-top-loading-bar" : "npm i react-top-loading-bar --legacy-peer-deps"
+  "forMyNote": {
+    "react-top-loading-bar": "npm i react-top-loading-bar --legacy-peer-deps"
   }
 }
-

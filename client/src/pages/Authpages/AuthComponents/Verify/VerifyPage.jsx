@@ -2,11 +2,13 @@
 import React from 'react'
 import './VerifyPage.scss'
 import imge_ga from "../../AuthImges/authlogo.png"
+import { useParams } from 'react-router-dom'
 
 
 const VerifyPage = () => {
 
-
+  const params = useParams()
+  console.log(params);
   return (
     <>
       <div className="verify-page">

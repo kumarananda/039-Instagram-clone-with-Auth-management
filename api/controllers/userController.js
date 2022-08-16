@@ -5,6 +5,8 @@ import jwt from 'jsonwebtoken'
 import { sendEmail } from "../utility/sendEmail.js";
 import { sendSms_B, sendSms_V } from "../utility/sendSms.js";
 import { createToken } from "../utility/createToken.js";
+import { emailHtml } from "../utility/emailHtml.js";
+import UserToken from "../models/UserToken.js";
 
 /**
  * @access public
@@ -277,11 +279,19 @@ export const  editUser = async (req, res, next) => {
     const hash = await bcrypt.hash(req.body.password, salt)
 
     try {
+        // send new user on db
         const createUser = await User.create({...req.body, password : hash})
 
-        const token = createToken({id : createUser._id});
+        // create token for user account verify
+        const token =  createToken({id : createUser._id});
+   
+        // token update on db
+        const updateTkn = await UserToken.create({userId : createUser._id, verifyToken : token});
+
+        //create link with _id & token for send emil, sms, etc
         const verify_link = `http://localhost:3000/user/${createUser._id}/verify/${token}`;
-        sendEmail(createUser.email, "Instagram Verification", `Hi ${createUser.name} please verify your account.`, `<p>${verify_link}</p>` )
+
+        sendEmail(createUser.email, "Instagram Verification", `Hi ${createUser.name} please verify your account.`, emailHtml(createUser.name, verify_link));
         
 
         // mail sending
@@ -350,6 +360,25 @@ export const getLogedInUser = async (req, res, next) => {
 
     }catch(error){
         // next(createError(400, {msg : "faild", error}))
+        next(error)
+    }
+
+
+}
+/**
+ * @access public
+ * @route /api/user/verify
+ * @method get 
+ */
+export const verifyUserAccount = async (req, res, next) => {
+
+    try{
+
+
+
+        
+
+    }catch(error){
         next(error)
     }
 
