@@ -66,3 +66,24 @@ a {
 
     
 }
+
+.logo-header{
+    display: flex;
+    justify-content: center;
+    height: 60px;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+    .logo-box{
+
+        max-width: 975px;
+        width: 100%;
+        text-align: left;
+            
+        img{
+            height: 30px;
+        }
+
+    }
+
+
+}

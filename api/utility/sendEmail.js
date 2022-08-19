@@ -9,21 +9,20 @@ export const sendEmail = async (to, subject, text, html) => {
     try{
 
         let transport = nodemailer.createTransport({
-            host: "smtp.mailtrap.io",
-            port: 2525,
+            host: "smtp.gmail.com",
+            port: 587,
             auth: {
-              user: "7f5026911c5592",
-              pass: "00824fc0cef5b7"
+              user: "anandamernprac@gmail.com",
+              pass: "lptqxhnsxsbdbwfp"
             }
         });
         
         await transport.sendMail({
-            from    : "kumaranandainfo@gmail.com",
+            from    : "anandamernprac@gmail.com",
             to      : to,
             subject : subject,
             text    : text ,
             html    :html
-            
         })
 
 
@@ -32,6 +31,31 @@ export const sendEmail = async (to, subject, text, html) => {
     }
 }
 
+// mailtrap note
+// try{
+
+//     let transport = nodemailer.createTransport({
+//         host: "smtp.mailtrap.io",
+//         port: 2525,
+//         auth: {
+//           user: "7f5026911c5592",
+//           pass: "00824fc0cef5b7"
+//         }
+//     });
+    
+//     await transport.sendMail({
+//         from    : "kumaranandainfo@gmail.com",
+//         to      : to,
+//         subject : subject,
+//         text    : text ,
+//         html    :html
+        
+//     })
+
+
+// }catch(error){
+//     console.log(error);
+// }
 
 // // async..await is not allowed in global scope, must use a wrapper
 // async function main() {

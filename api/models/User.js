@@ -11,7 +11,7 @@ const userSchema = mongoose.Schema({
     email : {
         type : String,
         required : true,
-        // unique :true,
+        unique :true,
     },
     cell : {
         type : String,
@@ -22,7 +22,7 @@ const userSchema = mongoose.Schema({
     username : {
         type : String,
         required : true,
-        // unique :true,
+        unique :true,
         trim : true
     },
     password : {

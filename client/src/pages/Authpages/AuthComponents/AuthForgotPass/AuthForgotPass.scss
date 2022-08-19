@@ -1,0 +1,45 @@
+
+
+.auth-container-content {
+    .auth-form-box{
+        
+
+        .logo-box{
+            display: flex;
+            justify-content: center;
+            margin-top: 24px;
+            margin-bottom: 16px;
+
+            .box{
+                height: 96px;
+                width: 96px;
+                background-image: url('https://www.instagram.com/static/bundles/es6/sprite_core_32f0a4f27407.png/32f0a4f27407.png');
+                background-position: -130px 0;
+            }
+
+        }
+        .forgot-pass-cintent {
+            h4{
+                line-height: 24px;
+                font-size: 16px !important;
+
+            }
+            p{
+                font-size: 12px;
+            }
+        }
+        .create-acc {
+            margin-bottom: 55px;
+            a{
+                color: rgb(102, 102, 102);
+                font-size: 14px;
+                
+            }
+            
+        }
+        .back-login {
+            border: 1px solid #ddd;
+
+        }
+    }
+}

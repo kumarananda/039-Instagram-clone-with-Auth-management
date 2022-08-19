@@ -18,6 +18,7 @@ import VerifyPage from "./pages/Authpages/AuthComponents/Verify/VerifyPage";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { creatToast } from "./utility/toast";
+import ForgotPassword from "./pages/Authpages/ForgotPassword";
 
 
 function App() {
@@ -90,6 +91,7 @@ function App() {
       <Routes>
         <Route path="/login" element={ <AuthRedirectUser> <Login /> </AuthRedirectUser>  }/>
         <Route path="/register" element={ <AuthRedirectUser>  <Register /> </AuthRedirectUser>  }/>
+        <Route path="/forgot-password" element={ <>  <ForgotPassword /> </>  }/>
         <Route path="/user/:id/verify/:token" element={ <VerifyPage /> }/>
         <Route path="/:id" element={ <AuthenticateUser> <Profile /> </AuthenticateUser> }/>
         <Route path="/" element={ <AuthenticateUser> <Home /> </AuthenticateUser>  }/>
