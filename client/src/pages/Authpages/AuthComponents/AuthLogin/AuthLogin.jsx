@@ -86,11 +86,11 @@ const AuthLogin = () => {
               // console.log(res.data.user);
               // console.log(authstate.user);
               // console.log("authstate");
-              // creatToast('Please verify your account')
+              creatToast('Please verify your account')
               
               authdispatch({type : 'USER_ACC_VERIFY', payload : res.data.user})
 
-              navigate('/verify');
+              // navigate('/verify');
             }
 
 

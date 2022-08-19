@@ -2,13 +2,32 @@
 import React from 'react'
 import './VerifyPage.scss'
 import imge_ga from "../../AuthImges/authlogo.png"
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
+import { useEffect } from 'react'
+import axios from 'axios'
+import { creatToast } from '../../../../utility/toast'
 
 
 const VerifyPage = () => {
 
   const params = useParams()
-  console.log(params);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    axios.post('http://localhost:5050/api/user/verify', params)
+    .then(res => {
+      console.log(res.data);
+
+      creatToast("Account Activation Successful **")
+      navigate('/login')
+
+    })
+    .catch(error => {
+      creatToast("Accoutn Activation Faild")
+    })
+  })
+
+
   return (
     <>
       <div className="verify-page">

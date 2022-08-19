@@ -4,7 +4,7 @@ import createError from "./createError.js";
 import jwt from 'jsonwebtoken'
 import { sendEmail } from "../utility/sendEmail.js";
 import { sendSms_B, sendSms_V } from "../utility/sendSms.js";
-import { createToken } from "../utility/createToken.js";
+import { createJwtToken } from "../utility/createToken.js";
 import { emailHtml } from "../utility/emailHtml.js";
 import UserToken from "../models/UserToken.js";
 
@@ -283,7 +283,7 @@ export const  editUser = async (req, res, next) => {
         const createUser = await User.create({...req.body, password : hash})
 
         // create token for user account verify
-        const token =  createToken({id : createUser._id});
+        const token =  createJwtToken({id : createUser._id});
    
         // token update on db
         const updateTkn = await UserToken.create({userId : createUser._id, verifyToken : token});
@@ -372,10 +372,28 @@ export const getLogedInUser = async (req, res, next) => {
  */
 export const verifyUserAccount = async (req, res, next) => {
 
-    try{
+    try{ 
+        const {id , token} = req.body;
 
+        
 
+        // check token
+        // const verify = await UserToken.findOne({userId : id, verifyToken : token });
+        const verify = await UserToken.findOne({id : id, verifyToken : token });
+        console.log(verify);
 
+        // check data verify of not
+        if(!verify){
+            next(createError(404, 'Invalid Verify url'));
+        }
+        if( verify){
+            await User.findByIdAndUpdate(id, {
+                isVerified : true
+            })
+            res.status(200).json({message : "User Account verified successful."});
+            verify.remove()
+        }
+        
         
 
     }catch(error){
