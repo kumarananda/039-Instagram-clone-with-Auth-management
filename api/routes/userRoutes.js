@@ -1,5 +1,5 @@
 import express from 'express';
-import { createUser, deleteUser, editUser, getAllUser, getLogedInUser, getSingleUser, userLogin, userRegister, verifyUserAccount } from '../controllers/userController.js';
+import { createUser, deleteUser, editUser, getAllUser, getLogedInUser, getSingleUser, userLogin, userRegister, verifyUserAccount, RecoverPassword } from '../controllers/userController.js';
 import adminMeddleware from '../middlewares/adminMeddleware.js';
 import authMedleware from '../middlewares/authMeddleware.js';
 import userMeddleware from '../middlewares/userMeddleware.js';
@@ -14,6 +14,7 @@ router.post('/login', userLogin)
 router.post('/register', userRegister)
 router.get('/me', getLogedInUser)
 router.post('/verify', verifyUserAccount)
+router.post('/recover-password', RecoverPassword)
 
 // Routs for Rest API 
 router.route('/').get(adminMeddleware, getAllUser).post(adminMeddleware, createUser);

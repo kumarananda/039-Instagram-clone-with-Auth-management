@@ -31,7 +31,7 @@ const AuthForgotPass = () => {
 
   // form filed state
   const [input, setInput] = useState({ auth : ''});
-  // console.log(input);
+  console.log(input);
 
   //  input design con
   const inpDcon = {
@@ -46,9 +46,19 @@ const AuthForgotPass = () => {
   
     }
 
-    // use contex
-    const { authdispatch , authstate} = useContext(AuthContext)
-    
+  const HandleForgotPassword = async (e) => {
+    e.preventDefault()
+
+    await axios.post('http://localhost:5050/api/user/recover-password', {auth : input.auth})
+    .then(res => {
+      console.log(res.data);
+    })
+    .catch(error => {
+      console.log(error)
+    })
+
+
+  }
   
 
 
@@ -71,7 +81,7 @@ const AuthForgotPass = () => {
           
 
           <div className="input-form">
-            <form  onSubmit={"handleUserLogin"}>
+            <form  onSubmit={HandleForgotPassword}>
 
               <div className="inp-box">
                 <label htmlFor='auth_fild'  className={inpDcon.authL}>Email, Username or password</label>
@@ -91,7 +101,7 @@ const AuthForgotPass = () => {
           </div>
 
           <div className="create-acc">
-            <a href="#">Create New Account</a>
+            <Link to="/register">Create New Account</Link>
           </div>
           <div className="back-login">
             <Link to="/login">Back Login</Link>

@@ -365,6 +365,7 @@ export const getLogedInUser = async (req, res, next) => {
 
 
 }
+
 /**
  * @access public
  * @route /api/user/verify
@@ -399,6 +400,27 @@ export const verifyUserAccount = async (req, res, next) => {
     }catch(error){
         next(error)
     }
+
+
+}
+
+/**
+ * @access public
+ * @route /api/user/recover-password
+ * @method get 
+ */
+export const RecoverPassword = async (req, res, next) => {
+
+    console.log('test server');
+
+    // try{ 
+    //     console.log(req.body);
+        
+        
+
+    // }catch(error){
+    //     next(error)
+    // }
 
 
 }

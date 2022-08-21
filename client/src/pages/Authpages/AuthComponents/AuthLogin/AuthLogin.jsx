@@ -148,7 +148,7 @@ const AuthLogin = () => {
           </div>
 
           <div className="forgot-pass">
-            <a href="#">Forgot password?</a>
+            <Link to="/forgot-password">Forgot password?</Link>
           </div>
            
 
