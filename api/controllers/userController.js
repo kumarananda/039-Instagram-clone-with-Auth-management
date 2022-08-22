@@ -5,7 +5,7 @@ import jwt from 'jsonwebtoken'
 import { sendEmail } from "../utility/sendEmail.js";
 import { sendSms_B, sendSms_V } from "../utility/sendSms.js";
 import { createJwtToken } from "../utility/createToken.js";
-import { emailHtml } from "../utility/emailHtml.js";
+import { emailHtml, emailHtml_recoverPass } from "../utility/emailHtml.js";
 import UserToken from "../models/UserToken.js";
 
 /**
@@ -410,17 +410,41 @@ export const verifyUserAccount = async (req, res, next) => {
  * @method get 
  */
 export const RecoverPassword = async (req, res, next) => {
+    
+    
+    try{ 
+        const { auth } = req.body
 
-    console.log('test server');
+        const recovery_user = await User.findOne({email : auth});
+        // const login_useremail = await User.findOne({email : auth});
+        // const login_username = await User.findOne({username : auth});
+        // const login_usercell = await User.findOne({cell : auth});
+        // const login_user = login_useremail ? login_useremail : (login_username ? login_username : login_usercell );
 
-    // try{ 
-    //     console.log(req.body);
+        // apply on user not found
+        if(!recovery_user){
+            res.status(404).json({
+                message : `Email dosn't exixts`
+            })
+        }
+
+        if(recovery_user){
+            const token = createJwtToken({id : recovery_user.email})
+
+            //create link with _id & token for send emil, sms, etc
+            const verify_link = `http://localhost:3000/password-recover/${token}`;
+            sendEmail(recovery_user.email, "Instagram Password Reset", `Hi ${recovery_user.name} hare is your password recoverey Link.`, emailHtml_recoverPass(recovery_user.name, verify_link));
+
+            await UserToken.create({userId : recovery_user.id, verifyToken : token})
+            res.status(202).json({message : "Recovery Link sent"})
+
+        }
+
         
-        
 
-    // }catch(error){
-    //     next(error)
-    // }
+    }catch(error){
+        next(error)
+    }
 
 
 }
