@@ -49,7 +49,7 @@ const AuthForgotPass = () => {
   const HandleForgotPassword = async (e) => {
     e.preventDefault()
 
-    await axios.post('http://localhost:5050/api/user/recover-password', {auth : input.auth})
+    await axios.post('http://localhost:5050/api/user/forgot-password', {auth : input.auth})
     .then(res => {
       console.log(res.data);
     })
@@ -81,7 +81,7 @@ const AuthForgotPass = () => {
           
 
           <div className="input-form">
-            <form  onSubmit={HandleForgotPassword}>
+            <form  onSubmit={HandleForgotPassword} method="POST">
 
               <div className="inp-box">
                 <label htmlFor='auth_fild'  className={inpDcon.authL}>Email, Username or password</label>

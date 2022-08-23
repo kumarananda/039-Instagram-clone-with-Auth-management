@@ -197,40 +197,6 @@ export const  editUser = async (req, res, next) => {
         
         const login_user = login_useremail ? login_useremail : (login_username ? login_username : login_usercell );
         
-        // console.log(login_user);
-
-        {
-
-        //  // find user by email , username, cell any type of data 02 ***
-        // let login_user = null;
-        // const login_useremail = await User.findOne({email : data});
-        // if(login_useremail){
-        //     login_user = login_useremail
-        // }else {
-        //     const login_username = await User.findOne({username : data});
-        //     if(login_username){
-        //         login_user = login_username;
-        //     }else{
-        //         const login_usercell = await User.findOne({cell : data});
-        //         login_user = login_usercell;
-        //     }
-        // }
-
-        
-        // // find user 
-        // let login_user = await User.findOne({email});
-             
-        // if(!login_user){
-        //     const login_username = await User.findOne({username});
-        //     login_user = login_username 
-        // }
-
-        // // find user 
-        // const login_useremail = await User.findOne({email});
-        // const login_username = await User.findOne({username});
-        // const login_user = login_useremail ? login_useremail : login_username;
-        }
-
 
         // apply on user not found
         if(!login_user){
@@ -406,12 +372,12 @@ export const verifyUserAccount = async (req, res, next) => {
 
 /**
  * @access public
- * @route /api/user/recover-password
+ * @route /api/user/forgot-password
  * @method get 
  */
-export const RecoverPassword = async (req, res, next) => {
+export const ForgotPassword = async (req, res, next) => {
     
-    
+    console.log(`test`);
     try{ 
         const { auth } = req.body
 
@@ -423,6 +389,7 @@ export const RecoverPassword = async (req, res, next) => {
 
         // apply on user not found
         if(!recovery_user){
+            console.log(`Email dosn't exixts`);
             res.status(404).json({
                 message : `Email dosn't exixts`
             })
@@ -436,6 +403,7 @@ export const RecoverPassword = async (req, res, next) => {
             sendEmail(recovery_user.email, "Instagram Password Reset", `Hi ${recovery_user.name} hare is your password recoverey Link.`, emailHtml_recoverPass(recovery_user.name, verify_link));
 
             await UserToken.create({userId : recovery_user.id, verifyToken : token})
+            console.log(`"Recovery Link sent"`);
             res.status(202).json({message : "Recovery Link sent"})
 
         }

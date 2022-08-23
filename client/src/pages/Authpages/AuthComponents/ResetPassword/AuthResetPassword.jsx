@@ -46,16 +46,16 @@ const AuthResetPassword = () => {
   
     }
 
-  const HandleForgotPassword = async (e) => {
+  const HandleResetPassword = async (e) => {
     e.preventDefault()
 
     await axios.post('http://localhost:5050/api/user/recover-password', {auth : input.auth})
-    .then(res => {
-      console.log(res.data);
-    })
-    .catch(error => {
-      console.log(error)
-    })
+    // .then(res => {
+    //   console.log(res.data);
+    // })
+    // .catch(error => {
+    //   console.log(error)
+    // })
 
 
   }
@@ -81,12 +81,12 @@ const AuthResetPassword = () => {
           
 
           <div className="input-form">
-            <form  onSubmit={HandleForgotPassword}>
+            <form  onSubmit={HandleResetPassword}>
 
-              <div className="inp-box">
+              {/* <div className="inp-box">
                 <label htmlFor='auth_fild'  className={inpDcon.authL}>Email, Username or password</label>
                 <input value={input.auth}  onChange={handleInput} id='auth_fild' className={inpDcon.authI} name='auth' type="text" />
-              </div>
+              </div> */}
 
               <input className='submit-btn ' type="submit" value="Send Link"/>
             </form>
