@@ -377,7 +377,6 @@ export const verifyUserAccount = async (req, res, next) => {
  */
 export const ForgotPassword = async (req, res, next) => {
     
-    console.log(`test`);
     try{ 
         const { auth } = req.body
 
@@ -391,7 +390,8 @@ export const ForgotPassword = async (req, res, next) => {
         if(!recovery_user){
             console.log(`Email dosn't exixts`);
             res.status(404).json({
-                message : `Email dosn't exixts`
+                message : `Email dosn't exixts`,
+                action : false
             })
         }
 
@@ -404,7 +404,7 @@ export const ForgotPassword = async (req, res, next) => {
 
             await UserToken.create({userId : recovery_user.id, verifyToken : token})
             console.log(`"Recovery Link sent"`);
-            res.status(202).json({message : "Recovery Link sent"})
+            res.status(202).json({message : "Recovery Link sent", action : true})
 
         }
 

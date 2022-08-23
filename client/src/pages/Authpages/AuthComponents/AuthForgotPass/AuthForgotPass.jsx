@@ -51,9 +51,15 @@ const AuthForgotPass = () => {
 
     await axios.post('http://localhost:5050/api/user/forgot-password', {auth : input.auth})
     .then(res => {
-      console.log(res.data);
+      console.log(res.data.action);
+
+      if(res.data.action){
+        creatToast('Password recover link sent')
+      }
+      // creatToast('Please verify your account')
     })
     .catch(error => {
+      creatToast('Email not found')
       console.log(error)
     })
 
