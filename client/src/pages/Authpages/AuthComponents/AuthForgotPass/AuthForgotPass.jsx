@@ -31,7 +31,13 @@ const AuthForgotPass = () => {
 
   // form filed state
   const [input, setInput] = useState({ auth : ''});
-  console.log(input);
+  // console.log(input);
+  // error msg
+  const [msg , setMsg] = useState({
+    type: '',
+    status : '',
+    message : false
+  })
 
   //  input design con
   const inpDcon = {
@@ -43,25 +49,48 @@ const AuthForgotPass = () => {
     const handleInput = (e) => {
       // setInput({...input, [e.target.name] : e.target.value})
       setInput( (prev) => ({...prev, [e.target.name] : e.target.value}));
+
   
     }
 
   const HandleForgotPassword = async (e) => {
     e.preventDefault()
 
-    await axios.post('http://localhost:5050/api/user/forgot-password', {auth : input.auth})
-    .then(res => {
-      console.log(res.data.action);
+    if(!input.auth){
+      setMsg( {
+        type : "warning",
+        message : "Filed is empty",
+        status : true
+      })
+    }
+    if(input.auth){
 
-      if(res.data.action){
-        creatToast('Password recover link sent')
-      }
-      // creatToast('Please verify your account')
-    })
-    .catch(error => {
-      creatToast('Email not found')
-      console.log(error)
-    })
+      await axios.post('http://localhost:5050/api/user/forgot-password', {auth : input.auth})
+      .then(res => {
+  
+        if(res.data.action){
+          setMsg( {
+            type : "success",
+            message : "Password recovery link sent",
+            status : true
+          })
+          // creatToast('Password recover link sent')
+        }
+        // creatToast('Please verify your account')
+      })
+      .catch(error => {
+        // creatToast('Email not found')
+        setMsg( {
+          type : "danger",
+          message : "Invalid Email of not exixts",
+          status : true
+        })
+        console.log(error)
+      })
+    }
+
+
+
 
 
   }
@@ -85,6 +114,12 @@ const AuthForgotPass = () => {
             <p>Enter your email, phone, or username and we'll send you a link to get back into your account.</p>
           </div>
           
+          <div className="alert-box">
+            {
+              msg.status && <p className={`alert alert-${msg.type}`}>{msg.message}</p>
+            }
+            
+          </div>
 
           <div className="input-form">
             <form  onSubmit={HandleForgotPassword} method="POST">

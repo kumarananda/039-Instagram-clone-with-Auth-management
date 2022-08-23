@@ -395,6 +395,12 @@ export const ForgotPassword = async (req, res, next) => {
             })
         }
 
+        // check previous token
+        const prev_token = await UserToken.findOne({userId : recovery_user.id});
+        if(prev_token){
+            await UserToken.findByIdAndDelete(prev_token.id)
+        }
+
         if(recovery_user){
             const token = createJwtToken({id : recovery_user.email})
 
