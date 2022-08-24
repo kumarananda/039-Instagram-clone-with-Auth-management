@@ -34,10 +34,18 @@ const AuthForgotPass = () => {
   // console.log(input);
   // error msg
   const [msg , setMsg] = useState({
-    type: '',
-    status : '',
-    message : false
+    type : "",
+    message : "",
+    status : false
   })
+  // alert close
+  const alertClose = () => {
+    setMsg({
+      type : "",
+      message : "",
+      status : false
+    })
+  }
 
   //  input design con
   const inpDcon = {
@@ -116,7 +124,7 @@ const AuthForgotPass = () => {
           
           <div className="alert-box">
             {
-              msg.status && <p className={`alert alert-${msg.type}`}>{msg.message}</p>
+              msg.status &&<> <h6 className={`alert alert-${msg.type}`}> <p> {msg.message}</p> <span onClick={alertClose}>X</span></h6> </>
             }
             
           </div>

@@ -218,10 +218,10 @@ export const  editUser = async (req, res, next) => {
         // login user info >> skiping _id, password, isAdmin and  "_doc" hare for Extra added data when skiping
         const { _id, password, isAdmin, ...login_info } =login_user._doc;
         
-         res.cookie("access_token", token).status(200).json({
-            token : token,
-            user : login_info
-         })
+        res.cookie("access_token", token).status(200).json({
+        token : token,
+        user : login_info
+        })
 
     } catch (error){
 
@@ -402,12 +402,13 @@ export const ForgotPassword = async (req, res, next) => {
         // }
 
         if(recovery_user){
-            const token = createJwtToken({id : recovery_user.email})
+            const token = createJwtToken({id : recovery_user.id}, "1d")
 
             //create link with _id & token for send emil, sms, etc
             const verify_link = `http://localhost:3000/password-reset/${token}`;
             sendEmail(recovery_user.email, "Instagram Password Reset", `Hi ${recovery_user.name} hare is your password recoverey Link.`, emailHtml_recoverPass(recovery_user.name, verify_link));
 
+            // TOKEN CREATED EXTRA
             await UserToken.create({userId : recovery_user.id, verifyToken : token})
             console.log(`"Recovery Link sent"`);
             res.status(202).json({message : "Recovery Link sent", action : true})
@@ -425,25 +426,41 @@ export const ForgotPassword = async (req, res, next) => {
 
 /**
  * @access public
- * @route /api/user/reset-password/:token
+ * @route /api/user/reset-password
  * @method post 
  */
 export const ResetPassword = async (req, res, next) => {
     
     try{ 
-        const {  } = req.body
+        // get token body data
+        const { token, password } = req.body
 
-        // const recovery_user = await User.findOne({email : auth});
- 
-        res.status(200).json("working ok")
+        // get user id from token
+        const {id} = jwt.verify(token, process.env.JWT_SECRET);
+        // make hash password
+        const salt = await bcrypt.genSalt(10);
+        const hash = await bcrypt.hash(req.body.password, salt)
 
+        // match DB server and linkToken
+        const checktokenS_L = await UserToken.findOne({userId : id , verifyToken : token})
+        console.log(checktokenS_L);
 
+        if(checktokenS_L){
 
+            const  user_data = await User.findByIdAndUpdate(id, {
+                password : hash
+            })
+            await UserToken.findOneAndDelete({userId : id})
+            res.send("Password Change successfull")
+        }else{
+            // not match
+        }
 
         
 
     }catch(error){
-        next(error)
+        res.send(error) // empty {}
+        // next(error)
     }
 
 

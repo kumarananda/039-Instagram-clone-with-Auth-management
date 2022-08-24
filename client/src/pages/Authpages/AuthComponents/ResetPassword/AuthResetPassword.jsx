@@ -1,6 +1,6 @@
 
 import React from 'react'
-import {Link, useNavigate} from 'react-router-dom'
+import {Link, useNavigate, useParams} from 'react-router-dom'
 import '../AuthRegister/AuthRegister.scss'
 import authlogo from '../../AuthImges/authlogo.png'
 import appleStore from '../../AuthImges/apple-store.png'
@@ -18,6 +18,7 @@ import axios from 'axios'
 // import { creatToast } from '../../../../utility/toast'
 import '../AuthForgotPass/AuthForgotPass.scss'
 import './ResetPassword.scss'
+import { creatToast } from '../../../../utility/toast'
 
 
 
@@ -25,14 +26,29 @@ import './ResetPassword.scss'
 const AuthResetPassword = () => {
 
 
-  // use navigate 
-  // const navigate = useNavigate();
+  const {token} = useParams()
+console.log(token);
+  // error msg alert
+  const [msg , setMsg] = useState({
+    type : "",
+    message : "",
+    status : false
+  })
 
+  const alertClose = () => {
+    setMsg({
+      type : "",
+      message : "",
+      status : false
+    })
+  }
 
 
   // form filed state
-  const [input, setInput] = useState({ auth : ''});
-  console.log(input);
+  const [input, setInput] = useState({ 
+    password : "",
+    confirmPass : ""
+  });
 
   //  input design con
   const inpDcon = {
@@ -51,14 +67,41 @@ const AuthResetPassword = () => {
 
   const HandleResetPassword = async (e) => {
     e.preventDefault()
+    if(!input.password  ||  !input.confirmPass ){
+      setMsg({
+        type : "warning",
+        message : "Filed empty",
+        status : true
+      })
+    }else if(input.password === input.confirmPass){
 
-    await axios.post('http://localhost:5050/api/user/reset-password', {auth : input.auth})
-    // .then(res => {
-    //   console.log(res.data);
-    // })
-    // .catch(error => {
-    //   console.log(error)
-    // })
+      await axios.post('http://localhost:5050/api/user/reset-password', {password : input.password, token})
+      .then(res => {
+
+        setMsg({
+        type : "success",
+        message : "Password udate successfull",
+        status : true
+        
+      })
+        creatToast("Your password update successfully")
+      })
+      .catch(error => {
+        console.log(error)
+      })
+
+
+
+
+
+    }else{
+      setMsg({
+        type : "danger",
+        message : "Password not match",
+        status : true
+      })
+    }
+
 
 
   }
@@ -75,7 +118,11 @@ const AuthResetPassword = () => {
           <div className="reset-pass-cintent">
             <h4>Set New Password</h4>
           </div>
-          
+          <div className="alert-box">
+            {
+              msg.status &&<> <h6 className={`alert alert-${msg.type}`}> <p> {msg.message}</p> <span onClick={alertClose}>X</span></h6> </>
+            }
+          </div>
 
           <div className="input-form">
             <form  onSubmit={HandleResetPassword}>
