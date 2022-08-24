@@ -76,7 +76,7 @@ const AuthForgotPass = () => {
           })
           // creatToast('Password recover link sent')
         }
-        // creatToast('Please verify your account')
+        
       })
       .catch(error => {
         // creatToast('Email not found')

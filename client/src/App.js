@@ -92,7 +92,7 @@ function App() {
         <Route path="/login" element={ <AuthRedirectUser> <Login /> </AuthRedirectUser>  }/>
         <Route path="/register" element={ <AuthRedirectUser>  <Register /> </AuthRedirectUser>  }/>
         <Route path="/forgot-password" element={ <>  <ForgotPassword /> </>  }/>
-        <Route path="/password-recover/:token" element={ <>  <ResetPassword /> </>  }/>
+        <Route path="/password-reset/:token" element={ <>  <ResetPassword /> </>  }/>
         <Route path="/user/:id/verify/:token" element={ <VerifyPage /> }/>
         <Route path="/:id" element={ <AuthenticateUser> <Profile /> </AuthenticateUser> }/>
         <Route path="/" element={ <AuthenticateUser> <Home /> </AuthenticateUser>  }/>

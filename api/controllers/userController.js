@@ -335,7 +335,7 @@ export const getLogedInUser = async (req, res, next) => {
 /**
  * @access public
  * @route /api/user/verify
- * @method get 
+ * @method post 
  */
 export const verifyUserAccount = async (req, res, next) => {
 
@@ -373,7 +373,7 @@ export const verifyUserAccount = async (req, res, next) => {
 /**
  * @access public
  * @route /api/user/forgot-password
- * @method get 
+ * @method post 
  */
 export const ForgotPassword = async (req, res, next) => {
     
@@ -396,16 +396,16 @@ export const ForgotPassword = async (req, res, next) => {
         }
 
         // check previous token
-        const prev_token = await UserToken.findOne({userId : recovery_user.id});
-        if(prev_token){
-            await UserToken.findByIdAndDelete(prev_token.id)
-        }
+        // const prev_token = await UserToken.findOne({userId : recovery_user.id});
+        // if(prev_token){
+        //     await UserToken.findByIdAndDelete(prev_token.id)
+        // }
 
         if(recovery_user){
             const token = createJwtToken({id : recovery_user.email})
 
             //create link with _id & token for send emil, sms, etc
-            const verify_link = `http://localhost:3000/password-recover/${token}`;
+            const verify_link = `http://localhost:3000/password-reset/${token}`;
             sendEmail(recovery_user.email, "Instagram Password Reset", `Hi ${recovery_user.name} hare is your password recoverey Link.`, emailHtml_recoverPass(recovery_user.name, verify_link));
 
             await UserToken.create({userId : recovery_user.id, verifyToken : token})
@@ -413,6 +413,32 @@ export const ForgotPassword = async (req, res, next) => {
             res.status(202).json({message : "Recovery Link sent", action : true})
 
         }
+
+        
+
+    }catch(error){
+        next(error)
+    }
+
+
+}
+
+/**
+ * @access public
+ * @route /api/user/reset-password/:token
+ * @method post 
+ */
+export const ResetPassword = async (req, res, next) => {
+    
+    try{ 
+        const {  } = req.body
+
+        // const recovery_user = await User.findOne({email : auth});
+ 
+        res.status(200).json("working ok")
+
+
+
 
         
 

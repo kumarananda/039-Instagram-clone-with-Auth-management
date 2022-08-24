@@ -17,6 +17,7 @@ import axios from 'axios'
 // import LoaderContext from '../../../../context/LoaderContext';
 // import { creatToast } from '../../../../utility/toast'
 import '../AuthForgotPass/AuthForgotPass.scss'
+import './ResetPassword.scss'
 
 
 
@@ -35,8 +36,10 @@ const AuthResetPassword = () => {
 
   //  input design con
   const inpDcon = {
-    authL : input.auth ? "cont-lavel" : '',
-    authI : input.auth ? "cont-input" : ''
+    newL : input.password ? "cont-lavel" : '',
+    newI : input.password ? "cont-input" : '',
+    confirmL : input.confirmPass ? "cont-lavel" : '',
+    confirmI : input.confirmPass ? "cont-input" : ''
   }
 
     // handle Input data
@@ -49,7 +52,7 @@ const AuthResetPassword = () => {
   const HandleResetPassword = async (e) => {
     e.preventDefault()
 
-    await axios.post('http://localhost:5050/api/user/recover-password', {auth : input.auth})
+    await axios.post('http://localhost:5050/api/user/reset-password', {auth : input.auth})
     // .then(res => {
     //   console.log(res.data);
     // })
@@ -69,24 +72,22 @@ const AuthResetPassword = () => {
           {/* <ToastContainer/> */}
         <div className="auth-form-box login-form">
 
-          <div className="logo-box">
-            <div className="box">
-
-            </div>
-          </div>
-          <div className="forgot-pass-cintent">
-            <h4>Trouble Logging In?</h4>
-            <p>Enter your email, phone, or username and we'll send you a link to get back into your account.</p>
+          <div className="reset-pass-cintent">
+            <h4>Set New Password</h4>
           </div>
           
 
           <div className="input-form">
             <form  onSubmit={HandleResetPassword}>
 
-              {/* <div className="inp-box">
-                <label htmlFor='auth_fild'  className={inpDcon.authL}>Email, Username or password</label>
-                <input value={input.auth}  onChange={handleInput} id='auth_fild' className={inpDcon.authI} name='auth' type="text" />
-              </div> */}
+              <div className="inp-box">
+                <label htmlFor='newPassFiled'  className={inpDcon.newL}>Enter your new password</label>
+                <input value={input.password}  onChange={handleInput} id='newPassFiled' className={inpDcon.newI} name='password' type="text" />
+              </div>
+              <div className="inp-box">
+                <label htmlFor='confirmPass'  className={inpDcon.confirmL}>Confirm password</label>
+                <input value={input.confirmPass}  onChange={handleInput} id='confirmPass' className={inpDcon.confirmI} name='confirmPass' type="text" />
+              </div>
 
               <input className='submit-btn ' type="submit" value="Send Link"/>
             </form>
