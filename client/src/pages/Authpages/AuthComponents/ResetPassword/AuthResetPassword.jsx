@@ -25,9 +25,11 @@ import { creatToast } from '../../../../utility/toast'
 
 const AuthResetPassword = () => {
 
+  // use navagate
+  const navigate = useNavigate()
 
   const {token} = useParams()
-console.log(token);
+  console.log(token);
   // error msg alert
   const [msg , setMsg] = useState({
     type : "",
@@ -78,16 +80,25 @@ console.log(token);
       await axios.post('http://localhost:5050/api/user/reset-password', {password : input.password, token})
       .then(res => {
 
+        console.log(res.data.action);
         setMsg({
         type : "success",
-        message : "Password udate successfull",
+        message : "Password update successfull",
         status : true
+        });
+        creatToast("Your password update successfully");
+
+        navigate('/login')
         
       })
-        creatToast("Your password update successfully")
-      })
       .catch(error => {
+        setMsg({
+          type : "warning",
+          message : "Link expire or used",
+          status : true
+          });
         console.log(error)
+
       })
 
 
@@ -101,8 +112,6 @@ console.log(token);
         status : true
       })
     }
-
-
 
   }
   
@@ -136,7 +145,7 @@ console.log(token);
                 <input value={input.confirmPass}  onChange={handleInput} id='confirmPass' className={inpDcon.confirmI} name='confirmPass' type="text" />
               </div>
 
-              <input className='submit-btn ' type="submit" value="Send Link"/>
+              <input className='submit-btn ' type="submit" value="Update Password"/>
             </form>
           </div>
 

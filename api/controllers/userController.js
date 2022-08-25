@@ -443,24 +443,26 @@ export const ResetPassword = async (req, res, next) => {
 
         // match DB server and linkToken
         const checktokenS_L = await UserToken.findOne({userId : id , verifyToken : token})
-        console.log(checktokenS_L);
+        // console.log(checktokenS_L);
 
-        if(checktokenS_L){
+        if(!checktokenS_L){
+            res.status(404).json({
+                action : false
+            })
+
+        }else{
 
             const  user_data = await User.findByIdAndUpdate(id, {
                 password : hash
             })
             await UserToken.findOneAndDelete({userId : id})
             res.send("Password Change successfull")
-        }else{
-            // not match
         }
 
         
 
     }catch(error){
-        res.send(error) // empty {}
-        // next(error)
+        next(createError(error))
     }
 
 
