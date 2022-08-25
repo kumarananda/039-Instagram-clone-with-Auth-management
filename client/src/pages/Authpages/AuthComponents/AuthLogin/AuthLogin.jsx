@@ -8,7 +8,7 @@ import playStore from '../../AuthImges/play-store.png'
 import {AiFillFacebook} from 'react-icons/ai'
 import './Login.scss'
 import { useState } from 'react'
-import swla from 'sweetalert'
+// import swla from 'sweetalert'
 import axios from 'axios'
 import cookie from 'js-cookie'
 import { useContext } from 'react';
