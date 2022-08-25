@@ -2,20 +2,20 @@
 import React from 'react'
 import {Link, useNavigate} from 'react-router-dom'
 import '../AuthRegister/AuthRegister.scss'
-import authlogo from '../../AuthImges/authlogo.png'
-import appleStore from '../../AuthImges/apple-store.png'
-import playStore from '../../AuthImges/play-store.png'
-import {AiFillFacebook} from 'react-icons/ai'
+// import authlogo from '../../AuthImges/authlogo.png'
+// import appleStore from '../../AuthImges/apple-store.png'
+// import playStore from '../../AuthImges/play-store.png'
+// import {AiFillFacebook} from 'react-icons/ai'
 // import './Login.scss'
 import '../AuthLogin/Login.scss'
 import { useState } from 'react'
-import swla from 'sweetalert'
+// import swla from 'sweetalert'
 import axios from 'axios'
-import cookie from 'js-cookie'
-import { useContext } from 'react';
-import AuthContext from '../../../../context/AuthContext';
-import LoaderContext from '../../../../context/LoaderContext';
-import { creatToast } from '../../../../utility/toast'
+// import cookie from 'js-cookie'
+// import { useContext } from 'react';
+// import AuthContext from '../../../../context/AuthContext';
+// import LoaderContext from '../../../../context/LoaderContext';
+// import { creatToast } from '../../../../utility/toast'
 import './AuthForgotPass.scss'
 
 
