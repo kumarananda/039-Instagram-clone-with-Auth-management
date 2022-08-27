@@ -7,6 +7,7 @@ import { sendSms_B, sendSms_V } from "../utility/sendSms.js";
 import { createJwtToken } from "../utility/createToken.js";
 import { emailHtml, emailHtml_recoverPass } from "../utility/emailHtml.js";
 import UserToken from "../models/UserToken.js";
+import { getrandCode } from "../utility/codeRandom.js";
 
 /**
  * @access public
@@ -251,8 +252,11 @@ export const  editUser = async (req, res, next) => {
         // create token for user account verify
         const token =  createJwtToken({id : createUser._id});
    
+        // get random code
+        const randCode = getrandCode(6)
+        console.log(randCode);
         // token update on db
-        const updateTkn = await UserToken.create({userId : createUser._id, verifyToken : token});
+        const updateTkn = await UserToken.create({userId : createUser._id, verifyToken : token, verifyCode : randCode});
 
         //create link with _id & token for send emil, sms, etc
         const verify_link = `http://localhost:3000/user/${createUser._id}/verify/${token}`;
@@ -264,7 +268,7 @@ export const  editUser = async (req, res, next) => {
         // sendEmail(createUser.email, "Instagram Account Verification", `Hi ${createUser.name} please verify your account.`, '<p>afddsfsd</p>' )
         // sms sending
         // sendSms_V()  // meuted for free account limite
-        // sendSms_B('01647544959', `Hi ${createUser.name}, Your account is created, Please Verify now`)
+        sendSms_B(createUser.cell, `Hi ${createUser.name}, Your account is created, Please Verify now. your code is ${randCode}`)
 
         res.status(200).json(createUser)
     } catch(error){
