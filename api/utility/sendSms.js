@@ -8,11 +8,11 @@ export const sendSms_B = async (number_to, message ) => {
     const approvedSenderID = "8809612443880";
 
     try{
-        console.log('sms test');
+        // console.log('sms test');
         // console.log('sms test');
 
         await axios.post(`https://bulksmsbd.net/api/smsapi?api_key=${apikey}&type=text&number=${number_to}&senderid=${approvedSenderID}&message=${message}`)
-        console.log('sms test');
+        // console.log('sms test');
     }catch(error){
         console.log(error);
     }

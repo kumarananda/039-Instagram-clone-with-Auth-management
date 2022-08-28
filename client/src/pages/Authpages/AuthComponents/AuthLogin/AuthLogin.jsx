@@ -28,6 +28,30 @@ const AuthLogin = () => {
   // use navigate 
   const navigate = useNavigate();
 
+    const getRandomCode = (length) => {
+      const random = () =>  JSON.stringify(Math.floor(Math.random() * 10)) 
+      if(length == 4){
+        const result = random() + random() + random() + random();
+        return result
+      }else if(length == 5){
+        const result = random() + random() + random() + random()+ random();
+        return result
+      }else
+      if(length == 6){
+        const result = random() + random() + random() + random()+ random()+ random();
+        return result
+      }else
+      if(length == 7){
+        const result = random() + random() + random() + random()+ random()+ random()+ random();
+        return result
+      }else
+      if(length == 8){
+        const result = random() + random() + random() + random()+ random() + random() + random()+ random();
+        return result
+      }
+
+    }
+    console.log(getRandomCode(7));
 
 
   // form filed state

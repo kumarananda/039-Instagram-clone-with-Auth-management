@@ -1,6 +1,7 @@
 
 export const emailHtml = (name, verify_link) => {
 
+    console.log('test html');
     return(
         `<div style=" padding: 5px 20px; height: 300px; width: 100%;background-color: rgb(186, 233, 164); text-align: center;">
             <h3 style="color: rgb(226, 43, 211);">Hi ${name} Welcome to our clone site</h3>

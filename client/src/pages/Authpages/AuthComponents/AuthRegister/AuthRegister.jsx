@@ -29,9 +29,11 @@ const AuthRegister = () => {
     email : '',
     name : "",
     username : "",
+    cell : "",
     password : ""
 
   })
+  
   console.log(input);
 
   // try input design con
@@ -42,6 +44,8 @@ const AuthRegister = () => {
     emailL : input.email ? "cont-lavel" : '',
     unameL : input.username ? "cont-lavel" : '',
     unameI : input.username ? "cont-input" : '',
+    cellL : input.cell ? "cont-lavel" : '',
+    cellI : input.cell ? "cont-input" : '',
     passL : input.password ? "cont-lavel" : '',
     passI : input.password ? "cont-input" : ''
   }
@@ -68,11 +72,13 @@ const AuthRegister = () => {
       }else{
         axios.post('http://localhost:5050/api/user/register', input)
         .then(res => {
+
           setInput((prev) => ({
             email : '',
             name : "",
             username : "",
-            password : ""
+            password : "",
+            cell : ""
           }))
 
           // creatToastSucc('Data Post Succfuly');
@@ -126,6 +132,7 @@ const AuthRegister = () => {
           <div className="input-form">
             <form onSubmit={handleUserRegister} action="#">
 
+              {/* input fields */}
               <div className="inp-box">
                 <label htmlFor='name_fild'  className={inpDcon.nameL}>Full Name</label>
                 <input value={input.name}  onChange={handleInput} id='name_fild' className={inpDcon.nameI} name='name' type="text" />
@@ -134,6 +141,10 @@ const AuthRegister = () => {
               <div className="inp-box">
                 <label htmlFor='emali_fild'  className={inpDcon.emailL}>Email</label>
                 <input value={input.email}  onChange={handleInput} id='email_fild' className={inpDcon.emailI} name='email' type="text" />
+              </div>
+              <div className="inp-box">
+                <label htmlFor='cell_fild'  className={inpDcon.cellL}>Phone (Optional)</label>
+                <input value={input.cell}  onChange={handleInput} id='cell_fild' className={inpDcon.cellI} name='cell' type="text" />
               </div>
 
               <div className="inp-box">
@@ -146,37 +157,7 @@ const AuthRegister = () => {
                 <input value={input.password} minLength={0} onChange={handleInput} id='pass_fild' className={inpDcon.passI} name='password' type="password" />
               </div>
 
-              {
-                /* <div className="inp-box2">
-                  <label className='inp-box-lavel'>
-                    <span  className='box-lavel cont-lavel '>Mobile Number or Email</span>
-                    <input value={input.email}  onChange={handleInput} className='box-input cont-input' name='email' type="text" />
-                  </label>
-                </div>
-                <div className="inp-box2">
-                  <label className='inp-box-lavel'>
-                    <span  className={nameLAct} >Full Name</span>
-                    <input value={input.name}  onChange={handleInput} className={nameIAct} name='name' type="text" />
-                  </label>
-                </div>
-                <div className="inp-box2">
-                  <label className='inp-box-lavel'>
-                    <span  className='box-lavel cont-lavel '>User Name</span>
-                    <input value={input.username}  onChange={handleInput} className='box-input cont-input' name='username' type="text" />
-                  </label>
-                </div>
-                <div className="inp-box2">
-                  <label className='inp-box-lavel'>
-                    <span  className='box-lavel cont-lavel '>Password</span>
-                    <input value={input.password}  onChange={handleInput} className='cont-input' name='password' type="text" />
-                  </label>
-                </div>
-                <input type="text" placeholder='Mobile Number or Email'/> 
-                <input type="text" placeholder='Full Name'/> 
-                <input type="text" placeholder='Username'/> 
-                <input type="text" placeholder='Password'/>  */
-              }
-
+              {/* from inner message */}
               <p className='sign-up-msg'>
                 People who use our service may have uploaded your contact information to Instagram. <a href="#">Learn More</a> <br /><br /> {/*<div className='space-br' /> <div className='space-br' />*/}
                 By signing up, you agree to our Terms , <a  href="#">Privacy Policy</a> and <a href="#">Cookies Policy</a>.

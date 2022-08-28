@@ -16,7 +16,7 @@ const userSchema = mongoose.Schema({
     cell : {
         type : String,
         // required : true,
-        // unique :true,
+        unique :true,
         trim : true
     },
     username : {

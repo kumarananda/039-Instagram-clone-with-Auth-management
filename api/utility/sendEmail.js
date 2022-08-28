@@ -7,13 +7,13 @@ export const sendEmail = async (to, subject, text, html) => {
 
 
     try{
-
+        console.log('test mail');
         let transport = nodemailer.createTransport({
             host: "smtp.gmail.com",
             port: 587,
             auth: {
               user: "anandamernprac@gmail.com",
-              pass: "lptqxhnsxsbdbwfp"
+              pass: "fowjhicauxgwipzm"
             }
         });
         

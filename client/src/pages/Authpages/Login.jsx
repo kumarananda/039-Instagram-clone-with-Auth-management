@@ -7,6 +7,8 @@ import AuthLogin from './AuthComponents/AuthLogin/AuthLogin';
 
 
 const Login = () => {
+
+
   return (
     <>
       <div className="auth-page">
