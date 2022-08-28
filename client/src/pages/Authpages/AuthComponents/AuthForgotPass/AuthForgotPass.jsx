@@ -21,6 +21,7 @@ import './AuthForgotPass.scss'
 
 
 
+
 const AuthForgotPass = () => {
 
 
@@ -31,7 +32,7 @@ const AuthForgotPass = () => {
 
   // form filed state
   const [input, setInput] = useState({ auth : '', code : ''});
-  // console.log(input);
+  console.log(input);
   // handle Input data
   const handleInput = (e) => {
     // setInput({...input, [e.target.name] : e.target.value})
@@ -96,6 +97,7 @@ const AuthForgotPass = () => {
           })
           setFormCon(true)
 
+
         }
         
       })
@@ -103,7 +105,7 @@ const AuthForgotPass = () => {
         // creatToast('Email not found')
         setMsg( {
           type : "danger",
-          message : "Invalid Email of not exixts",
+          message : "Invalid Email or not exixts",
           status : true
         })
         console.log(error)
@@ -122,7 +124,17 @@ const AuthForgotPass = () => {
     e.preventDefault()
     await axios.post('http://localhost:5050/api/user/pass-recovery-code', {cell : input.auth, verifyCode : input.code  })
     .then(res => {
-        console.log(res);
+      if(res.data.action){
+        // setMsg( {
+        //   type : "success",
+        //   message : "working recovery code sent",
+        //   status : true
+        // })
+        setFormCon(false)
+
+
+      }
+        // console.log(res.data.action);
     })
     .catch(error => {
       console.log(error);

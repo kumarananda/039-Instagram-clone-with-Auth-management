@@ -268,7 +268,7 @@ export const  editUser = async (req, res, next) => {
         // sendEmail(createUser.email, "Instagram Account Verification", `Hi ${createUser.name} please verify your account.`, '<p>afddsfsd</p>' )
         // sms sending
         // sendSms_V()  // meuted for free account limite
-        // sendSms_B(createUser.cell, `Hi ${createUser.name}, Your account is created, Please Verify now. your code is ${randCode}`)
+        sendSms_B(createUser.cell, `Hi ${createUser.name}, Your account is created, Please Verify now. your code is ${randCode}`)
 
         res.status(200).json(createUser)
     } catch(error){
@@ -351,6 +351,7 @@ export const verifyUserAccount = async (req, res, next) => {
         // check token
         // const verify = await UserToken.findOne({userId : id, verifyToken : token });
         const verify = await UserToken.findOne({id : id, verifyToken : token });
+
         console.log(verify);
 
         // check data verify of not
@@ -383,13 +384,13 @@ export const ForgotPassword = async (req, res, next) => {
     
     try{ 
         const { auth } = req.body
-
+        console.log(auth);
         let regexmail = /^[a-z]+[a-z0-9\.]+@[a-z0-9]+\.[a-z]{2,3}$/
         let phonevalid_bd = /^(01|\+8801|8801)[0-9]{9}$/;
 
         // test data type email, phone_bd or not
+        const validphone = phonevalid_bd.test(auth);
         const validMail = regexmail.test(auth)
-        const validphone = phonevalid_bd.test(auth)
         // console.log(validphone);
 
         // if valid phone no
@@ -413,16 +414,16 @@ export const ForgotPassword = async (req, res, next) => {
     
             if(recovery_user){
                 // 5min minute= 300000 millisecond expire time
-                const token = createJwtToken({id : recovery_user.id}, 300000) 
+                const token = createJwtToken({id : recovery_user.id}, '1d') 
     
                 // create verify code
                 const verifyCode = getrandCode(6)
 
-    
+                console.log(verifyCode);
                 // TOKEN CREATED for time validation
                 await UserToken.create({userId : recovery_user.id, verifyToken : token, verifyCode })
                 console.log(`Verify Code sent`);
-                // sendSms_B(createUser.cell, `Hi ${createUser.name}, Your Verify  code is ${randCode}`)
+                sendSms_B(createUser.cell, `Hi ${createUser.name}, Your Verify  code is ${verifyCode}`)
 
                 res.status(202).json({message : "Verify Code sent", action : 'code', })
     
@@ -512,9 +513,9 @@ export const ResetPassword = async (req, res, next) => {
 
             const  user_data = await User.findByIdAndUpdate(id, {
                 password : hash
-            })
+            });
             await UserToken.findOneAndDelete({userId : id})
-            res.send("Password Change successfull")
+            res.status(200).json("Password Change successfull")
         }
 
         
@@ -532,13 +533,14 @@ export const ResetPassword = async (req, res, next) => {
  * @method post 
  */
 export const PassRrecoveryCode = async (req, res, next) => {
-    console.log('test');
+
     try{ 
         // get submited body data
-        const { cell, code } = req.body;
+        const { cell, verifyCode } = req.body;
+        // console.log(req.body);
 
         const userdata = await User.findOne({cell :cell});
-        console.log(userdata.id);
+        // console.log(userdata.id);
 
         if(!userdata){
             req.status(404).json({
@@ -549,14 +551,31 @@ export const PassRrecoveryCode = async (req, res, next) => {
         if(userdata){
             const tokenData = await UserToken.findOne({userId : userdata.id})
 
-            // match bouth 
-            if(tokenData.verifyCode == code){
-                
-            }
+            // console.log(tokenData.verifyToken);
 
-            res.status(200).json({
-                message : tokenData.verifyCode
-            })
+            if(tokenData.verifyCode == verifyCode){
+
+                // check time
+                const jwt_verify =  jwt.verify(tokenData.verifyToken, process.env.JWT_SECRET);
+                // jwt.verify(token, process.env.JWT_SECRET)
+
+
+
+                if(jwt_verify){
+
+                    const verify_link = `http://localhost:3000/password-reset/${tokenData.verifyToken}`;
+                    console.log(verify_link);
+                    res.status(404).json({action: verify_link})
+
+                }
+
+                
+            }else{
+                
+                res.status(400).json({action: false})
+            }
+            
+   
 
         }
 
@@ -565,7 +584,9 @@ export const PassRrecoveryCode = async (req, res, next) => {
         
 
     }catch(error){
+        // res.status(400).json({error : error.message})
         next(createError(error))
+
     }
 
 
