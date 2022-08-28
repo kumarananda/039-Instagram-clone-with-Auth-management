@@ -24,6 +24,21 @@ const AuthRegister = () => {
     return toast(msg)
   }
 
+    // error/alert msg 
+    const [msg , setMsg] = useState({
+      type : "",
+      message : "",
+      status : false
+    })
+    // alert close
+    const alertClose = () => {
+      setMsg({
+        type : "",
+        message : "",
+        status : false
+      })
+    }
+
   // state for form fild
   const [input, setInput] = useState({
     email : '',
@@ -72,7 +87,11 @@ const AuthRegister = () => {
       }else{
         axios.post('http://localhost:5050/api/user/register', input)
         .then(res => {
-
+          setMsg({
+            type : "success",
+            message : "Verify with phone?",
+            status : true
+          })
           setInput((prev) => ({
             email : '',
             name : "",
@@ -125,9 +144,16 @@ const AuthRegister = () => {
             </div>
           </div>
 
-          <div className="divider-or">
-            OR
+          <div className="alert-box">
+            {
+              msg.status &&<> <h6 className={`alert alert-${msg.type}`}> <p> {msg.message}</p> <Link to={'/user/mobile-verify'}>Go</Link> <span onClick={alertClose}>X</span></h6> </>
+            }
+            
           </div>
+          {
+            !msg.status && <div className="divider-or"> OR </div>
+
+          }
 
           <div className="input-form">
             <form onSubmit={handleUserRegister} action="#">

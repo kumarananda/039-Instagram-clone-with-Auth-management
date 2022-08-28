@@ -30,9 +30,17 @@ const AuthForgotPass = () => {
 
 
   // form filed state
-  const [input, setInput] = useState({ auth : ''});
+  const [input, setInput] = useState({ auth : '', code : ''});
   // console.log(input);
-  // error msg
+  // handle Input data
+  const handleInput = (e) => {
+    // setInput({...input, [e.target.name] : e.target.value})
+    setInput( (prev) => ({...prev, [e.target.name] : e.target.value}));
+
+
+  }
+
+  // error/alert msg 
   const [msg , setMsg] = useState({
     type : "",
     message : "",
@@ -50,16 +58,12 @@ const AuthForgotPass = () => {
   //  input design con
   const inpDcon = {
     authL : input.auth ? "cont-lavel" : '',
-    authI : input.auth ? "cont-input" : ''
+    authI : input.auth ? "cont-input" : '',
+    codeL : input.code ? "cont-lavel" : '',
+    codeI : input.code ? "cont-input" : ''
   }
 
-    // handle Input data
-    const handleInput = (e) => {
-      // setInput({...input, [e.target.name] : e.target.value})
-      setInput( (prev) => ({...prev, [e.target.name] : e.target.value}));
 
-  
-    }
 
   const HandleForgotPassword = async (e) => {
     e.preventDefault()
@@ -76,13 +80,22 @@ const AuthForgotPass = () => {
       await axios.post('http://localhost:5050/api/user/forgot-password', {auth : input.auth})
       .then(res => {
   
-        if(res.data.action){
+        if(res.data.action === 'mail'){
           setMsg( {
             type : "success",
             message : "Password recovery link sent",
             status : true
           })
           // creatToast('Password recover link sent')
+        }
+        if(res.data.action === 'code'){
+          setMsg( {
+            type : "success",
+            message : "Password recovery code sent",
+            status : true
+          })
+          setFormCon(true)
+
         }
         
       })
@@ -98,8 +111,22 @@ const AuthForgotPass = () => {
     }
 
 
+  }
+
+  // from state
+  const [formCon, setFormCon] = useState(false)
 
 
+  // HandleResetPassVaiCode
+  const HandleResetPassVaiCode = async (e) => {
+    e.preventDefault()
+    await axios.post('http://localhost:5050/api/user/pass-recovery-code', {cell : input.auth, verifyCode : input.code  })
+    .then(res => {
+        console.log(res);
+    })
+    .catch(error => {
+      console.log(error);
+    })
 
   }
   
@@ -119,7 +146,7 @@ const AuthForgotPass = () => {
           </div>
           <div className="forgot-pass-cintent">
             <h4>Trouble Logging In?</h4>
-            <p>Enter your email, phone, or username and we'll send you a link to get back into your account.</p>
+            <p>Enter your email,  or phone and we'll send you a link or code to get back into your account.</p>
           </div>
           
           <div className="alert-box">
@@ -130,15 +157,30 @@ const AuthForgotPass = () => {
           </div>
 
           <div className="input-form">
-            <form  onSubmit={HandleForgotPassword} method="POST">
-
-              <div className="inp-box">
-                <label htmlFor='auth_fild'  className={inpDcon.authL}>Email, Username or password</label>
-                <input value={input.auth}  onChange={handleInput} id='auth_fild' className={inpDcon.authI} name='auth' type="text" />
-              </div>
-
+            {!formCon && <>
+            
+              <form  onSubmit={HandleForgotPassword} method="POST">
+                <div className="inp-box">
+                  <label htmlFor='auth_fild'  className={inpDcon.authL}>Email or phone</label>
+                  <input value={input.auth}  onChange={handleInput} id='auth_fild' className={inpDcon.authI} name='auth' type="text" />
+                </div>
               <input className='submit-btn ' type="submit" value="Send Link"/>
-            </form>
+              </form>
+
+            </>}
+            { formCon && <>
+                <form  onSubmit={HandleResetPassVaiCode} method="POST">
+                  <div className="inp-box">
+                    <label htmlFor='code_fild'  className={inpDcon.codeL}>Verify Code</label>
+                    <input value={input.code}  onChange={handleInput} id='code_fild' className={inpDcon.codeI} name='code' type="text" />
+                  </div>
+                  <input className='submit-btn ' type="submit" value="Submit"/>
+                </form>
+              </>
+            }
+              
+            
+
           </div>
 
           <div className=" m-t-30">

@@ -268,3 +268,28 @@
 
     }
 }
+
+
+.alert-box {
+
+    h6 {
+        display: flex;
+        justify-content: space-between;
+        padding: 5px;
+        align-items: center;
+        p{
+            margin-bottom: 0;
+        }
+        span{
+            height: 25px;
+            width: 25px;
+            border-radius: 50%;
+            background: rgb(235, 232, 89);
+            color: red;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+    }
+}

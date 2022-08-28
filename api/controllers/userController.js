@@ -268,7 +268,7 @@ export const  editUser = async (req, res, next) => {
         // sendEmail(createUser.email, "Instagram Account Verification", `Hi ${createUser.name} please verify your account.`, '<p>afddsfsd</p>' )
         // sms sending
         // sendSms_V()  // meuted for free account limite
-        sendSms_B(createUser.cell, `Hi ${createUser.name}, Your account is created, Please Verify now. your code is ${randCode}`)
+        // sendSms_B(createUser.cell, `Hi ${createUser.name}, Your account is created, Please Verify now. your code is ${randCode}`)
 
         res.status(200).json(createUser)
     } catch(error){
@@ -384,40 +384,94 @@ export const ForgotPassword = async (req, res, next) => {
     try{ 
         const { auth } = req.body
 
-        const recovery_user = await User.findOne({email : auth});
-        // const login_useremail = await User.findOne({email : auth});
-        // const login_username = await User.findOne({username : auth});
-        // const login_usercell = await User.findOne({cell : auth});
-        // const login_user = login_useremail ? login_useremail : (login_username ? login_username : login_usercell );
+        let regexmail = /^[a-z]+[a-z0-9\.]+@[a-z0-9]+\.[a-z]{2,3}$/
+        let phonevalid_bd = /^(01|\+8801|8801)[0-9]{9}$/;
 
-        // apply on user not found
-        if(!recovery_user){
-            console.log(`Email dosn't exixts`);
+        // test data type email, phone_bd or not
+        const validMail = regexmail.test(auth)
+        const validphone = phonevalid_bd.test(auth)
+        // console.log(validphone);
+
+        // if valid phone no
+        if(validphone){
+            const recovery_user = await User.findOne({cell : auth});
+
+            // apply on user not found
+            if(!recovery_user){
+                console.log(`Phone no dosn't exixts`);
+                res.status(404).json({
+                    message : `Phone no dosn't exixts`,
+                    action : 'error'
+                })
+            }
+    
+            // check previous token
+            const prev_token = await UserToken.findOne({userId : recovery_user.id});
+            if(prev_token){
+                await UserToken.findByIdAndDelete(prev_token.id)
+            }
+    
+            if(recovery_user){
+                // 5min minute= 300000 millisecond expire time
+                const token = createJwtToken({id : recovery_user.id}, 300000) 
+    
+                // create verify code
+                const verifyCode = getrandCode(6)
+
+    
+                // TOKEN CREATED for time validation
+                await UserToken.create({userId : recovery_user.id, verifyToken : token, verifyCode })
+                console.log(`Verify Code sent`);
+                // sendSms_B(createUser.cell, `Hi ${createUser.name}, Your Verify  code is ${randCode}`)
+
+                res.status(202).json({message : "Verify Code sent", action : 'code', })
+    
+            }
+        
+          // if valid email address  
+        }else if(validMail){
+
+            const recovery_user = await User.findOne({email : auth});
+
+            // apply on user not found
+            if(!recovery_user){
+                console.log(`Email dosn't exixts`);
+                res.status(404).json({
+                    message : `Email dosn't exixts`,
+                    action : 'error'
+                })
+            }
+    
+            // check previous token
+            const prev_token = await UserToken.findOne({userId : recovery_user.id});
+            if(prev_token){
+                await UserToken.findByIdAndDelete(prev_token.id)
+            }
+    
+            if(recovery_user){
+                const token = createJwtToken({id : recovery_user.id}, "1d")
+    
+                //create link with _id & token for send emil, sms, etc
+                const verify_link = `http://localhost:3000/password-reset/${token}`;
+                sendEmail(recovery_user.email, "Instagram Password Reset", `Hi ${recovery_user.name} hare is your password recoverey Link.`, emailHtml_recoverPass(recovery_user.name, verify_link));
+    
+                // TOKEN CREATED EXTRA
+                await UserToken.create({userId : recovery_user.id, verifyToken : token})
+                console.log(`"Recovery Link sent"`);
+                res.status(202).json({message : "Recovery Link sent", action : 'mail'})
+            }
+
+        }else{
+            console.log(`Phone or Email format error`);
             res.status(404).json({
-                message : `Email dosn't exixts`,
-                action : false
+                message : `Phone or Email format error`,
+                action : 'error'
             })
         }
 
-        // check previous token
-        // const prev_token = await UserToken.findOne({userId : recovery_user.id});
-        // if(prev_token){
-        //     await UserToken.findByIdAndDelete(prev_token.id)
-        // }
 
-        if(recovery_user){
-            const token = createJwtToken({id : recovery_user.id}, "1d")
 
-            //create link with _id & token for send emil, sms, etc
-            const verify_link = `http://localhost:3000/password-reset/${token}`;
-            sendEmail(recovery_user.email, "Instagram Password Reset", `Hi ${recovery_user.name} hare is your password recoverey Link.`, emailHtml_recoverPass(recovery_user.name, verify_link));
 
-            // TOKEN CREATED EXTRA
-            await UserToken.create({userId : recovery_user.id, verifyToken : token})
-            console.log(`"Recovery Link sent"`);
-            res.status(202).json({message : "Recovery Link sent", action : true})
-
-        }
 
         
 
@@ -462,6 +516,51 @@ export const ResetPassword = async (req, res, next) => {
             await UserToken.findOneAndDelete({userId : id})
             res.send("Password Change successfull")
         }
+
+        
+
+    }catch(error){
+        next(createError(error))
+    }
+
+
+}
+
+/**
+ * @access public
+ * @route /api/user/pass-recovery-code
+ * @method post 
+ */
+export const PassRrecoveryCode = async (req, res, next) => {
+    console.log('test');
+    try{ 
+        // get submited body data
+        const { cell, code } = req.body;
+
+        const userdata = await User.findOne({cell :cell});
+        console.log(userdata.id);
+
+        if(!userdata){
+            req.status(404).json({
+                message : 'user not found or time expire'
+            })
+        }
+
+        if(userdata){
+            const tokenData = await UserToken.findOne({userId : userdata.id})
+
+            // match bouth 
+            if(tokenData.verifyCode == code){
+                
+            }
+
+            res.status(200).json({
+                message : tokenData.verifyCode
+            })
+
+        }
+
+
 
         
 

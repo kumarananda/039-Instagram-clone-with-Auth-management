@@ -6,7 +6,7 @@ import authlogo from '../../AuthImges/authlogo.png'
 import appleStore from '../../AuthImges/apple-store.png'
 import playStore from '../../AuthImges/play-store.png'
 import {AiFillFacebook} from 'react-icons/ai'
-import './Login.scss'
+import './VerifyMobile.scss'
 import { useState } from 'react'
 // import swla from 'sweetalert'
 import axios from 'axios'
@@ -15,11 +15,12 @@ import { useContext } from 'react';
 import AuthContext from '../../../../context/AuthContext';
 import LoaderContext from '../../../../context/LoaderContext';
 import { creatToast } from '../../../../utility/toast'
+import AuthFooter from '../AuthFooter/AuthFooter'
 
 
 
 
-const AuthLogin = () => {
+const VerifyMobile = () => {
 
 
   // use loader context 
@@ -108,28 +109,24 @@ const AuthLogin = () => {
 
   return (
     <>
-      <div className="auth-container-content">
+          <div className="auth-page">
+        <div className="auth-main-cont">
+
+          <div className="auth-content">
+          <div className="auth-container-content">
           {/* <ToastContainer/> */}
         <div className="auth-form-box login-form">
 
           <div className="logo-box">
               <img src={authlogo} alt="" />
           </div>
-          
-
-
-
-
+            {/* input form */}
           <div className="input-form">
             <form  onSubmit={handleUserLogin}>
 
               <div className="inp-box">
                 <label htmlFor='auth_fild'  className={inpDcon.authL}>Username or password</label>
                 <input value={input.auth}  onChange={handleInput} id='auth_fild' className={inpDcon.authI} name='auth' type="text" />
-              </div>
-              <div className="inp-box">
-                <label htmlFor='pass_fild'  className={inpDcon.passL}>Password</label>
-                <input value={input.password}  onChange={handleInput} id='pass_fild' className={inpDcon.passI} name='password' type="text" />
               </div>
 
               <input className='submit-btn ' type="submit" value="Log In"/>
@@ -156,25 +153,27 @@ const AuthLogin = () => {
         <div className=" if-account-or-not">
           <span><h5 className=''>Don't have an account? <Link to={"/register"}>Sign up</Link></h5></span>
         </div>
-
-        <div className="get-app">
-          <div className="text"><p>Get the app.</p></div>
-          <div className="app">
-            <div className="app-box">
-              <div className="google">
-                <img src={playStore} alt="" />
-              </div>
-              <div className="apple">
-                <img src={appleStore} alt="" />
-              </div>
-            </div>
+        
+      </div>
+            
 
           </div>
         </div>
         
       </div>
+      <div className="auth-footer">
+          <AuthFooter/>
+      </div>
+
+
+
+
+
+
+
     </>
   )
 }
 
-export default AuthLogin;
+export default VerifyMobile;
+

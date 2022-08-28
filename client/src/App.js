@@ -15,6 +15,7 @@ import AuthContext from "./context/AuthContext";
 import LoadingBar from 'react-top-loading-bar'
 import LoaderContext from "./context/LoaderContext";
 import VerifyPage from "./pages/Authpages/AuthComponents/Verify/VerifyPage";
+import VerifyMobile from "./pages/Authpages/AuthComponents/Verify/VerifyMobile";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { creatToast } from "./utility/toast";
@@ -94,6 +95,7 @@ function App() {
         <Route path="/forgot-password" element={ <>  <ForgotPassword /> </>  }/>
         <Route path="/password-reset/:token" element={ <>  <ResetPassword /> </>  }/>
         <Route path="/user/:id/verify/:token" element={ <VerifyPage /> }/>
+        <Route path="/user/mobile-verify" element={ <VerifyMobile /> }/>
         <Route path="/:id" element={ <AuthenticateUser> <Profile /> </AuthenticateUser> }/>
         <Route path="/" element={ <AuthenticateUser> <Home /> </AuthenticateUser>  }/>
       </Routes>

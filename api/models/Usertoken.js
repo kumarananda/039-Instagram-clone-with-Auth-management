@@ -14,7 +14,7 @@ const userTokenSchema = mongoose.Schema({
     },
     verifyCode : {
         type : String,
-        required : true,
+        // required : true,
     }
 
 
