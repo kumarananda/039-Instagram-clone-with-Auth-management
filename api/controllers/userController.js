@@ -423,7 +423,7 @@ export const ForgotPassword = async (req, res, next) => {
                 // TOKEN CREATED for time validation
                 await UserToken.create({userId : recovery_user.id, verifyToken : token, verifyCode })
                 console.log(`Verify Code sent`);
-                sendSms_B(createUser.cell, `Hi ${createUser.name}, Your Verify  code is ${verifyCode}`)
+                sendSms_B(recovery_user.cell, `Hi ${recovery_user.name}, Your Verify  code is ${verifyCode}`)
 
                 res.status(202).json({message : "Verify Code sent", action : 'code', })
     
@@ -537,7 +537,8 @@ export const PassRrecoveryCode = async (req, res, next) => {
     try{ 
         // get submited body data
         const { cell, verifyCode } = req.body;
-        // console.log(req.body);
+        // console.log(cell);
+        // console.log(verifyCode + 'hhh');
 
         const userdata = await User.findOne({cell :cell});
         // console.log(userdata.id);
@@ -547,33 +548,48 @@ export const PassRrecoveryCode = async (req, res, next) => {
                 message : 'user not found or time expire'
             })
         }
+        // console.log(userdata.id);
 
         if(userdata){
             const tokenData = await UserToken.findOne({userId : userdata.id})
+            // token verify 
+            const jwt_verify =  jwt.verify(tokenData.verifyToken, process.env.JWT_SECRET);
 
-            // console.log(tokenData.verifyToken);
+            // console.log(jwt_verify.id);
+            if(!jwt_verify.id){
+                res.status(404).json({action: false, message: "Time Expire"})
+            }
 
             if(tokenData.verifyCode == verifyCode){
-
-                // check time
-                const jwt_verify =  jwt.verify(tokenData.verifyToken, process.env.JWT_SECRET);
-                // jwt.verify(token, process.env.JWT_SECRET)
-
-
-
-                if(jwt_verify){
-
-                    const verify_link = `http://localhost:3000/password-reset/${tokenData.verifyToken}`;
-                    console.log(verify_link);
-                    res.status(404).json({action: verify_link})
-
-                }
-
-                
-            }else{
-                
-                res.status(400).json({action: false})
+                const verify_link = `http://localhost:3000/password-reset/${tokenData.verifyToken}`;
+                console.log(verify_link);
+                res.status(404).json({action: verify_link})
             }
+
+            
+
+
+            // if(tokenData.verifyCode == verifyCode){
+
+            //     // check time
+  
+
+                // console.log(jwt_verify);
+
+
+            //     if(jwt_verify){
+
+            //         const verify_link = `http://localhost:3000/password-reset/${tokenData.verifyToken}`;
+            //         console.log(verify_link);
+            //         res.status(404).json({action: verify_link})
+
+            //     }
+
+                
+            // }else{
+                
+            //     res.status(400).json({action: false})
+            // }
             
    
 

@@ -31,7 +31,7 @@ const AuthForgotPass = () => {
 
 
   // form filed state
-  const [input, setInput] = useState({ auth : '', code : ''});
+  const [input, setInput] = useState({ auth : '', vcode : ''});
   console.log(input);
   // handle Input data
   const handleInput = (e) => {
@@ -60,8 +60,8 @@ const AuthForgotPass = () => {
   const inpDcon = {
     authL : input.auth ? "cont-lavel" : '',
     authI : input.auth ? "cont-input" : '',
-    codeL : input.code ? "cont-lavel" : '',
-    codeI : input.code ? "cont-input" : ''
+    vcodeL : input.vcode ? "cont-lavel" : '',
+    vcodeI : input.vcode ? "cont-input" : ''
   }
 
 
@@ -122,21 +122,20 @@ const AuthForgotPass = () => {
   // HandleResetPassVaiCode
   const HandleResetPassVaiCode = async (e) => {
     e.preventDefault()
-    await axios.post('http://localhost:5050/api/user/pass-recovery-code', {cell : input.auth, verifyCode : input.code  })
+    await axios.post('http://localhost:5050/api/user/pass-recovery-code', {cell : input.auth, verifyCode : input.vcode  })
     .then(res => {
-      if(res.data.action){
-        // setMsg( {
-        //   type : "success",
-        //   message : "working recovery code sent",
-        //   status : true
-        // })
-        setFormCon(false)
+      // if(res.data.action){
+      //   // setMsg( {
+      //   //   type : "success",
+      //   //   message : "working recovery code sent",
+      //   //   status : true
+      //   // })
+      //   setFormCon(false)
 
 
-      }
-        // console.log(res.data.action);
-    })
-    .catch(error => {
+      // }
+      console.log("res.action");
+    }).catch(error => {
       console.log(error);
     })
 
@@ -171,7 +170,7 @@ const AuthForgotPass = () => {
           <div className="input-form">
             {!formCon && <>
             
-              <form  onSubmit={HandleForgotPassword} method="POST">
+              <form id='forgotpass'  onSubmit={HandleForgotPassword} method="POST">
                 <div className="inp-box">
                   <label htmlFor='auth_fild'  className={inpDcon.authL}>Email or phone</label>
                   <input value={input.auth}  onChange={handleInput} id='auth_fild' className={inpDcon.authI} name='auth' type="text" />
@@ -181,10 +180,10 @@ const AuthForgotPass = () => {
 
             </>}
             { formCon && <>
-                <form  onSubmit={HandleResetPassVaiCode} method="POST">
+                <form id='phoneverify' onSubmit={HandleResetPassVaiCode} method="POST">
                   <div className="inp-box">
-                    <label htmlFor='code_fild'  className={inpDcon.codeL}>Verify Code</label>
-                    <input value={input.code}  onChange={handleInput} id='code_fild' className={inpDcon.codeI} name='code' type="text" />
+                    <label htmlFor='vcode_fild'  className={inpDcon.vcodeL}>Verify Code</label>
+                    <input value={input.vcode}  onChange={handleInput} id='vcode_fild' className={inpDcon.vcodeI} name='vcode' type="text" />
                   </div>
                   <input className='submit-btn ' type="submit" value="Submit"/>
                 </form>
