@@ -454,6 +454,7 @@ export const ForgotPassword = async (req, res, next) => {
     
                 //create link with _id & token for send emil, sms, etc
                 const verify_link = `http://localhost:3000/password-reset/${token}`;
+                // console.log(verify_link);
                 sendEmail(recovery_user.email, "Instagram Password Reset", `Hi ${recovery_user.name} hare is your password recoverey Link.`, emailHtml_recoverPass(recovery_user.name, verify_link));
     
                 // TOKEN CREATED EXTRA
@@ -470,11 +471,6 @@ export const ForgotPassword = async (req, res, next) => {
             })
         }
 
-
-
-
-
-        
 
     }catch(error){
         next(error)
@@ -560,37 +556,19 @@ export const PassRrecoveryCode = async (req, res, next) => {
                 res.status(404).json({action: false, message: "Time Expire"})
             }
 
-            if(tokenData.verifyCode == verifyCode){
-                const verify_link = `http://localhost:3000/password-reset/${tokenData.verifyToken}`;
-                console.log(verify_link);
-                res.status(404).json({action: verify_link})
+            if(tokenData.verifyCode !== verifyCode){
+                res.status(404).json({
+                    action: "error",
+                    message : "Your code not match"
+                })
             }
 
-            
+            if(tokenData.verifyCode == verifyCode){
 
-
-            // if(tokenData.verifyCode == verifyCode){
-
-            //     // check time
-  
-
-                // console.log(jwt_verify);
-
-
-            //     if(jwt_verify){
-
-            //         const verify_link = `http://localhost:3000/password-reset/${tokenData.verifyToken}`;
-            //         console.log(verify_link);
-            //         res.status(404).json({action: verify_link})
-
-            //     }
-
-                
-            // }else{
-                
-            //     res.status(400).json({action: false})
-            // }
-            
+                const verify_link = `http://localhost:3000/password-reset/${tokenData.verifyToken}`;
+                console.log(verify_link);
+                res.status(200).json({go: verify_link})
+            }
    
 
         }
