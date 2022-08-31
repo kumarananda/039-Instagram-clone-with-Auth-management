@@ -2,20 +2,11 @@
 import React from 'react'
 import {Link, useNavigate} from 'react-router-dom'
 import '../AuthRegister/AuthRegister.scss'
-// import authlogo from '../../AuthImges/authlogo.png'
-// import appleStore from '../../AuthImges/apple-store.png'
-// import playStore from '../../AuthImges/play-store.png'
-// import {AiFillFacebook} from 'react-icons/ai'
-// import './Login.scss'
 import '../AuthLogin/Login.scss'
 import { useState } from 'react'
-// import swla from 'sweetalert'
+
 import axios from 'axios'
-// import cookie from 'js-cookie'
-// import { useContext } from 'react';
-// import AuthContext from '../../../../context/AuthContext';
-// import LoaderContext from '../../../../context/LoaderContext';
-// import { creatToast } from '../../../../utility/toast'
+
 import './AuthForgotPass.scss'
 
 
@@ -26,7 +17,7 @@ const AuthForgotPass = () => {
 
 
   // use navigate 
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
 
 
@@ -124,17 +115,12 @@ const AuthForgotPass = () => {
     e.preventDefault()
     await axios.post('http://localhost:5050/api/user/pass-recovery-code', {cell : input.auth, verifyCode : input.vcode  })
     .then(res => {
-      // if(res.data.action){
-      //   // setMsg( {
-      //   //   type : "success",
-      //   //   message : "working recovery code sent",
-      //   //   status : true
-      //   // })
-      //   setFormCon(false)
+
+      // console.log(res.data.action);
+      window.location.replace(res.data.go);
 
 
-      // }
-      console.log("res.action");
+
     }).catch(error => {
       console.log(error);
     })
