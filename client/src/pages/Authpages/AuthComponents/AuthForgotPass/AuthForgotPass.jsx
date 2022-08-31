@@ -119,8 +119,6 @@ const AuthForgotPass = () => {
       // console.log(res.data.action);
       window.location.replace(res.data.go);
 
-
-
     }).catch(error => {
       console.log(error);
     })
