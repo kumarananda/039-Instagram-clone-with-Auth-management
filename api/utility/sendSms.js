@@ -4,7 +4,7 @@ import axios from 'axios';
 
 // for bulksmsbd.net SMS service
 export const sendSms_B = async (number_to, message ) => {
-    const apikey = "emL6aUC91aMYNR8fQ0d2";
+    const apikey = process.env.BULK_SMS_API_KEY;
     const approvedSenderID = "8809612443880";
 
     try{
@@ -28,7 +28,7 @@ export const sendSms_B = async (number_to, message ) => {
 // for Vonage SMS service
 const vonage = new Vonage({
   apiKey: "0dc01058",
-  apiSecret: "Hnex6wYC8waVNemY"
+  apiSecret: process.env.VONAGE_API_Secret
 })
 
 

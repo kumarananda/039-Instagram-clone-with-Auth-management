@@ -5,15 +5,18 @@ import nodemailer from 'nodemailer';
 // create Email 
 export const sendEmail = async (to, subject, text, html) => {
 
-
     try{
-        console.log('test mail');
+        console.log(to);
+        console.log(subject);
+        console.log(text);
+        console.log(html);
+        
         let transport = nodemailer.createTransport({
             host: "smtp.gmail.com",
             port: 587,
             auth: {
               user: "anandamernprac@gmail.com",
-              pass: "fowjhicauxgwipzm"
+              pass: process.env.GMAIL_APP_PASS
             }
         });
         

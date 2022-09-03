@@ -261,13 +261,9 @@ export const  editUser = async (req, res, next) => {
         //create link with _id & token for send emil, sms, etc
         const verify_link = `http://localhost:3000/user/${createUser._id}/verify/${token}`;
 
+
         sendEmail(createUser.email, "Instagram Verification", `Hi ${createUser.name} please verify your account.`, emailHtml(createUser.name, verify_link));
         
-
-        // mail sending
-        // sendEmail(createUser.email, "Instagram Account Verification", `Hi ${createUser.name} please verify your account.`, '<p>afddsfsd</p>' )
-        // sms sending
-        // sendSms_V()  // meuted for free account limite
         sendSms_B(createUser.cell, `Hi ${createUser.name}, Your account is created, Please Verify now. your code is ${randCode}`)
 
         res.status(200).json(createUser)
