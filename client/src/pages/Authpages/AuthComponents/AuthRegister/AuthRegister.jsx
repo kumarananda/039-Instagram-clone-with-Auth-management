@@ -28,14 +28,16 @@ const AuthRegister = () => {
     const [msg , setMsg] = useState({
       type : "",
       message : "",
-      status : false
+      status : false,
+      pVerify : false
     })
     // alert close
     const alertClose = () => {
       setMsg({
         type : "",
         message : "",
-        status : false
+        status : false,
+        pVerify : false
       })
     }
 
@@ -49,7 +51,7 @@ const AuthRegister = () => {
 
   })
   
-  console.log(input);
+  // console.log(input);
 
   // try input design con
   const inpDcon = {
@@ -87,10 +89,16 @@ const AuthRegister = () => {
       }else{
         axios.post('http://localhost:5050/api/user/register', input)
         .then(res => {
+          
+          const ifPhone = `Hi ${res.data.name} your account created Please verify account with mail or go phone verify`;
+          const ifNotPhone = `Hi ${res.data.name} your account created Please verify account with mail`;
+          const verifyMsg = res.data.reqPhoneCode ? ifPhone : ifNotPhone ;
+
           setMsg({
             type : "success",
-            message : "Verify with phone?",
-            status : true
+            message : res.data.reqPhoneCode ? `Verify Email or for phone verify` : "Verify with mail?",
+            status : true,
+            pVerify : res.data.reqPhoneCode ? true : false 
           })
           setInput((prev) => ({
             email : '',
@@ -100,8 +108,13 @@ const AuthRegister = () => {
             cell : ""
           }))
 
+          
+
+          console.log(res.data.name);
+          console.log(res.data.reqPhoneCode);
+
           // creatToastSucc('Data Post Succfuly');
-          swla("Success", 'Your account created successffully ', "success")
+          swla("Success", verifyMsg, "success")
           
         })
 
@@ -146,7 +159,7 @@ const AuthRegister = () => {
 
           <div className="alert-box">
             {
-              msg.status &&<> <h6 className={`alert alert-${msg.type}`}> <p> {msg.message}</p> <Link to={'/user/mobile-verify'}>Go</Link> <span onClick={alertClose}>X</span></h6> </>
+              msg.status &&<> <h6 className={`alert alert-${msg.type}`}> <p> {msg.message}</p> {msg.pVerify && <Link to={'/user/mobile-verify'}>Go</Link>} <span onClick={alertClose}>X</span></h6> </>
             }
             
           </div>

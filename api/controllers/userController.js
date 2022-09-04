@@ -264,7 +264,8 @@ export const  editUser = async (req, res, next) => {
         
         // sendSms_B(createUser.cell, `Hi ${createUser.name}, Your account is created, Please Verify now. your code is ${randCode}`)
 
-        res.status(200).json(createUser)
+        const phone_no = createUser.cell ? true : false
+        res.status(200).json({name : createUser.name, reqPhoneCode : phone_no} )
     } catch(error){
         
         //  directly send server error
@@ -565,6 +566,47 @@ export const PassRrecoveryCode = async (req, res, next) => {
             }
    
 
+        }
+
+
+
+        
+
+    }catch(error){
+        // res.status(400).json({error : error.message})
+        next(createError(error))
+
+    }
+
+
+}
+
+/**
+ * @access public
+ * @route /api/user/phone-code-sent
+ * @method post 
+ */
+export const phoneVerifyCodeSent = async (req, res, next) => {
+
+    try{ 
+        // get submited body data
+        const { auth } = req.body;
+        console.log(auth);
+
+        const userdata = await User.findOne({cell :auth});
+        // console.log(userdata.id);
+
+        if(!userdata){
+            req.status(404).json({
+                message : auth
+                // message : 'Phone No not found'
+            })
+        }
+        if(userdata){
+            req.status(200).json({
+                message : auth
+                // message : 'Phone No not found'
+            })
         }
 
 

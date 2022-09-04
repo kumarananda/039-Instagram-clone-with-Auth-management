@@ -45,17 +45,14 @@ const VerifyMobile = () => {
 
   // form filed state
   const [input, setInput] = useState({
-    auth : '',
-    password : ""
+    auth : ''
   });
-  // console.log(input);
+  console.log(input);
 
   //  input design con
   const inpDcon = {
     authL : input.auth ? "cont-lavel" : '',
-    authI : input.auth ? "cont-input" : '',
-    passL : input.password ? "cont-lavel" : '',
-    passI : input.password ? "cont-input" : ''
+    authI : input.auth ? "cont-input" : ''
   }
 
     // handle Input data
@@ -65,15 +62,27 @@ const VerifyMobile = () => {
   
     }
 
+    // form control
+    const [formview, setFormview] = useState('phone')
+
     // use contex
     const { authdispatch , authstate} = useContext(AuthContext)
     
     
     // handle User Resend verify 
-    const handleUserResendverify = (e) => {
+    const sendVerifyCode = async (e) => {
       e.preventDefault() 
 
+      await axios.post('http://localhost:5050/api/user/phone-code-sent', {auth : input.auth})
+      .then(res => {
+        
+        console.log(res.data);
+        console.log("res.data");
 
+      })
+      .catch(error => {
+        console.log(error);
+      })
 
 
 
@@ -85,7 +94,7 @@ const VerifyMobile = () => {
 
   return (
     <>
-          <div className="auth-page">
+      <div className="auth-page">
         <div className="auth-main-cont">
 
           <div className="auth-content">
@@ -97,22 +106,42 @@ const VerifyMobile = () => {
               <img src={authlogo} alt="" />
           </div>
           <div className="alert-box">
+
             {
-              msg.status &&<> <h6 className={`alert alert-${msg.type}`}> <p> {msg.message}</p> <Link to={'/user/mobile-verify'}>Go</Link> <span onClick={alertClose}>X</span></h6> </>
+              msg.status &&<> <h6 className={`alert alert-${msg.type}`}> <span onClick={alertClose}>X</span></h6> </>
             }
             
           </div>
             {/* input form */}
           <div className="input-form">
-            <form  onSubmit={handleUserResendverify}>
+            {formview === 'phone' && <>
+              <form  onSubmit={sendVerifyCode}>
+                <div className="inp-box">
+                  <label htmlFor='auth_fild'  className={inpDcon.authL}>Phone</label>
+                  <input value={input.auth}  onChange={handleInput} id='auth_fild' className={inpDcon.authI} name='auth' type="text" />
+                </div>
+                <input className='submit-btn ' type="submit" value="Get Code"/>
+              </form>
+            </>}
+            {formview === 'vCode' && <>
+              <form  onSubmit={sendVerifyCode  }>
+                <div className="inp-box">
+                  <label htmlFor='auth_fild'  className={inpDcon.authL}>Enter code</label>
+                  <input value={input.auth}  onChange={handleInput} id='auth_fild' className={inpDcon.authI} name='auth' type="text" />
+                </div>
+                <input className='submit-btn ' type="submit" value="Submit"/>
+              </form>
+            </>}
+            {formview === 'reSendLink' && <>
+              <form  onSubmit={sendVerifyCode  }>
+                <div className="inp-box">
+                  <label htmlFor='auth_fild'  className={inpDcon.authL}>Enter Email</label>
+                  <input value={input.auth}  onChange={handleInput} id='auth_fild' className={inpDcon.authI} name='auth' type="text" />
+                </div>
+                <input className='submit-btn ' type="submit" value="Get  Link"/>
+              </form>
+            </>}
 
-              <div className="inp-box">
-                <label htmlFor='auth_fild'  className={inpDcon.authL}>Phone</label>
-                <input value={input.auth}  onChange={handleInput} id='auth_fild' className={inpDcon.authI} name='auth' type="text" />
-              </div>
-
-              <input className='submit-btn ' type="submit" value="Log In"/>
-            </form>
           </div>
 
 
@@ -148,12 +177,6 @@ const VerifyMobile = () => {
       <div className="auth-footer">
           <AuthFooter/>
       </div>
-
-
-
-
-
-
 
     </>
   )
