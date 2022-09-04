@@ -239,8 +239,6 @@ export const  editUser = async (req, res, next) => {
  */
  export const  userRegister = async (req, res, next) => {
 
-    
-
     // make hash password
     const salt = await bcrypt.genSalt(10);
     const hash = await bcrypt.hash(req.body.password, salt)
@@ -264,7 +262,7 @@ export const  editUser = async (req, res, next) => {
 
         sendEmail(createUser.email, "Instagram Verification", `Hi ${createUser.name} please verify your account.`, emailHtml(createUser.name, verify_link));
         
-        sendSms_B(createUser.cell, `Hi ${createUser.name}, Your account is created, Please Verify now. your code is ${randCode}`)
+        // sendSms_B(createUser.cell, `Hi ${createUser.name}, Your account is created, Please Verify now. your code is ${randCode}`)
 
         res.status(200).json(createUser)
     } catch(error){

@@ -22,13 +22,26 @@ import AuthFooter from '../AuthFooter/AuthFooter'
 
 const VerifyMobile = () => {
 
+    // error msg alert
+    const [msg , setMsg] = useState({
+      type : "",
+      message : "",
+      status : false
+    })
+  
+    const alertClose = () => {
+      setMsg({
+        type : "",
+        message : "",
+        status : false
+      })
+    }
 
   // use loader context 
   const {loaderDispatch} = useContext(LoaderContext)
 
   // use navigate 
   const navigate = useNavigate();
-
 
   // form filed state
   const [input, setInput] = useState({
@@ -56,54 +69,17 @@ const VerifyMobile = () => {
     const { authdispatch , authstate} = useContext(AuthContext)
     
     
-    
-    
-
-    // handle user login 
-    const handleUserLogin = async  (e) => {
-      e.preventDefault();
-
-      try{
-        if(!input.auth || !input.password){
-          // swla('Filed Empty', 'All filds are require', 'error')
-          creatToast('All filds are required')
-        }else{
-
-          await axios.post('http://localhost:5050/api/user/login', {auth : input.auth, password : input.password})
-          .then(res => {
-
-            if(res.data.user.isVerified){
-
-              cookie.set('token', res.data.token);
-              console.log(res.data.user.name);
-              // console.log(res.data.user.isVerified);
-              // update data 
-              authdispatch({type : 'LOGIN_USER_SUCCESS', payload : res.data.user})
-              navigate('/');
-              loaderDispatch({type : "LOADER_START"})
-              
-            }else {
-              // console.log(res.data.user);
-              // console.log(authstate.user);
-              // console.log("authstate");
-              creatToast('Please verify your account')
-              
-              authdispatch({type : 'USER_ACC_VERIFY', payload : res.data.user})
-
-              // navigate('/verify');
-            }
+    // handle User Resend verify 
+    const handleUserResendverify = (e) => {
+      e.preventDefault() 
 
 
 
-          })
-        }
 
-
-      }catch(error){
-        creatToast('Wrong user name or password')
-      }
 
     }
+
+
 
 
 
@@ -120,12 +96,18 @@ const VerifyMobile = () => {
           <div className="logo-box">
               <img src={authlogo} alt="" />
           </div>
+          <div className="alert-box">
+            {
+              msg.status &&<> <h6 className={`alert alert-${msg.type}`}> <p> {msg.message}</p> <Link to={'/user/mobile-verify'}>Go</Link> <span onClick={alertClose}>X</span></h6> </>
+            }
+            
+          </div>
             {/* input form */}
           <div className="input-form">
-            <form  onSubmit={handleUserLogin}>
+            <form  onSubmit={handleUserResendverify}>
 
               <div className="inp-box">
-                <label htmlFor='auth_fild'  className={inpDcon.authL}>Username or password</label>
+                <label htmlFor='auth_fild'  className={inpDcon.authL}>Phone</label>
                 <input value={input.auth}  onChange={handleInput} id='auth_fild' className={inpDcon.authI} name='auth' type="text" />
               </div>
 
@@ -133,8 +115,10 @@ const VerifyMobile = () => {
             </form>
           </div>
 
-          <div className="divider-or">
-            OR
+
+
+          <div className="divider-or"> 
+            OR 
           </div>
 
           <div className="account-with">
