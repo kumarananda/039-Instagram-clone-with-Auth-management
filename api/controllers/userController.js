@@ -591,24 +591,103 @@ export const phoneVerifyCodeSent = async (req, res, next) => {
     try{ 
         // get submited body data
         const { auth } = req.body;
-        console.log(auth);
+        // console.log(auth);
 
-        const userdata = await User.findOne({cell :auth});
-        // console.log(userdata.id);
+        const userdata = await User.findOne({cell : auth});
+        // console.log(userdata);
 
         if(!userdata){
             req.status(404).json({
-                message : auth
-                // message : 'Phone No not found'
+                message : 'Phone No not found',
+                action : 'dataNotFound'
             })
         }
         if(userdata){
-            req.status(200).json({
-                message : auth
-                // message : 'Phone No not found'
+            //create token 
+            const token = createJwtToken({id : userdata.id}, "1d");
+
+            // check previous token
+            const prev_token = await UserToken.findOne({userId : userdata.id});
+            if(prev_token){
+                await UserToken.findByIdAndDelete(prev_token.id)
+            }
+
+            // create verify code
+            const verifyCode = getrandCode(6)
+
+            console.log(verifyCode);
+            // TOKEN CREATED for time validation
+            await UserToken.create({userId : userdata.id, verifyToken : token, verifyCode })
+
+            sendSms_B(userdata.cell, `Hi ${userdata.name}, Your Verify  code is ${verifyCode}`)
+
+
+            res.status(200).json({
+                message : "Verify code sent",
+                action : 'vCode'
             })
         }
 
+
+
+        
+
+    }catch(error){
+        // res.status(400).json({error : error.message})
+        next(createError(error))
+
+    }
+
+
+}
+
+
+/**
+ * @access public
+ * @route /api/user/phone-code-verify
+ * @method post 
+ */
+export const phoneCodeVerify = async (req, res, next) => {
+
+    try{ 
+        // get submited body data
+        const { auth, code } = req.body;
+
+
+        // get user data
+        const userdata = await User.findOne({cell : auth});
+        
+        // get code data
+        const tokenCodedata = await UserToken.findOne({userId : userdata.id});
+
+
+        // data error
+        if(!userdata || !tokenCodedata){
+            res.status(404).json({
+                message : "Data Error, try again",
+                action : 'dataError'
+            })
+        }
+        if(tokenCodedata.verifyCode !== code ){
+            res.status(200).json({
+                message : "Code not match",
+                action : 'codeError'
+            })
+        }
+
+        if(tokenCodedata.verifyCode === code ){
+
+            // user verify update
+            const userUpdt = await User.findByIdAndUpdate(userdata.id, {isVerified : true});
+
+            // remove token
+            await UserToken.findOneAndDelete({userId : userUpdt.id})
+
+            res.status(200).json({
+                message : "Code is match",
+                action : 'codeMatch'
+            })
+        }
 
 
         

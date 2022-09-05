@@ -45,14 +45,17 @@ const VerifyMobile = () => {
 
   // form filed state
   const [input, setInput] = useState({
-    auth : ''
+    auth : '',
+    code : ''
   });
   console.log(input);
 
   //  input design con
   const inpDcon = {
     authL : input.auth ? "cont-lavel" : '',
-    authI : input.auth ? "cont-input" : ''
+    authI : input.auth ? "cont-input" : '',
+    codeL : input.code ? "cont-lavel" : '',
+    codeI : input.code ? "cont-input" : ''
   }
 
     // handle Input data
@@ -73,20 +76,66 @@ const VerifyMobile = () => {
     const sendVerifyCode = async (e) => {
       e.preventDefault() 
 
-      await axios.post('http://localhost:5050/api/user/phone-code-sent', {auth : input.auth})
+      await axios.post('http://localhost:5050/api/user/phone-code-sent', input)
       .then(res => {
         
-        console.log(res.data);
-        console.log("res.data");
+        if(res.data.action === 'dataNotFound'){
+          setMsg({
+            type : "warning",
+            message : res.data.message,
+            status : res.data.action
+          })
+        }
 
+        if(res.data.action === 'vCode'){
+          setMsg({
+            type : "success",
+            message : res.data.message,
+            status : 'vCode'
+          })
+          setFormview('vCode')
+        }
       })
       .catch(error => {
         console.log(error);
       })
-
-
-
     }
+    // handle Phone code verify 
+    const verifyPhoneCode = async (e) => {
+      e.preventDefault() 
+
+      await axios.post('http://localhost:5050/api/user/phone-code-verify', input)
+      .then(res => {
+        if(res.data.action === 'codeError'){
+          setMsg({
+            type : "danger",
+            message : res.data.message,
+            status : res.data.action,
+          })
+        }
+        if(res.data.action === 'codeMatch'){
+          setMsg({
+            type : "success",
+            message : res.data.message,
+            status : res.data.action,
+          })
+
+          navigate('/login')
+        }
+
+        
+      })
+      .catch(error => {
+        setMsg({
+          type : "danger",
+          message : 'Data error, try again',
+          status : 'dataError'
+        })
+        console.log(error);
+      })
+    }
+
+
 
 
 
@@ -107,12 +156,21 @@ const VerifyMobile = () => {
           </div>
           <div className="alert-box">
 
+            {/* {
+              msg.status &&<> <h6 className={`alert alert-${msg.type}`}> {msg.message} <span onClick={alertClose}>X</span></h6> </>
+            } */}
             {
-              msg.status &&<> <h6 className={`alert alert-${msg.type}`}> <span onClick={alertClose}>X</span></h6> </>
+              msg.status === 'vCode' &&<> <h6 className={`alert alert-${msg.type}`}> {msg.message} <span onClick={alertClose}>X</span></h6> </>
+            }
+            {
+              msg.status === 'dataError' &&<> <h6 className={`alert alert-${msg.type}`}> {msg.message} <span onClick={alertClose}>X</span></h6> </>
+            }
+            {
+              msg.status === 'codeError' &&<> <h6 className={`alert alert-${msg.type}`}> {msg.message} <span onClick={alertClose}>X</span></h6> </>
             }
             
           </div>
-            {/* input form */}
+            {/*phone input form */}
           <div className="input-form">
             {formview === 'phone' && <>
               <form  onSubmit={sendVerifyCode}>
@@ -123,15 +181,17 @@ const VerifyMobile = () => {
                 <input className='submit-btn ' type="submit" value="Get Code"/>
               </form>
             </>}
+            {/* Verify code input form  */}
             {formview === 'vCode' && <>
-              <form  onSubmit={sendVerifyCode  }>
+              <form  onSubmit={ verifyPhoneCode  }>
                 <div className="inp-box">
-                  <label htmlFor='auth_fild'  className={inpDcon.authL}>Enter code</label>
-                  <input value={input.auth}  onChange={handleInput} id='auth_fild' className={inpDcon.authI} name='auth' type="text" />
+                  <label htmlFor='auth_fild'  className={inpDcon.codeL}>Enter code</label>
+                  <input value={input.code}  onChange={handleInput} id='auth_fild' className={inpDcon.codeI} name='code' type="text" />
                 </div>
                 <input className='submit-btn ' type="submit" value="Submit"/>
               </form>
             </>}
+            {/* resend vefify link */}
             {formview === 'reSendLink' && <>
               <form  onSubmit={sendVerifyCode  }>
                 <div className="inp-box">
