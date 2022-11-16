@@ -1,8 +1,7 @@
   
   // update by me >> get random code in javaScript 
-  export const getrandCode = (length = 6 ) => {
+  export const getRandCode = (length = 6 ) => {
 
-    // const rand = () =>  JSON.stringify(Math.floor(Math.random() * 10)) 
     const rand = () => Math.floor(Math.random() * 10)
     let code = []
     for (let i = 0; i < length; i++) {
@@ -17,7 +16,7 @@
 
 
 
-export const getrandCode_OLD = (length) => {
+export const getRandCode_OLD = (length) => {
     const rand = () =>  JSON.stringify(Math.floor(Math.random() * 10)) 
     if(length == 4){
       const result = rand() + rand() + rand() + rand();

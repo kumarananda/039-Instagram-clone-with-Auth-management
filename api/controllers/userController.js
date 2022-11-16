@@ -7,7 +7,7 @@ import { sendSms_B, sendSms_V } from "../utility/sendSms.js";
 import { createJwtToken } from "../utility/createToken.js";
 import { emailHtml, emailHtml_recoverPass } from "../utility/emailHtml.js";
 import UserToken from "../models/UserToken.js";
-import { getrandCode } from "../utility/codeRandom.js";
+import { getRandCode } from "../utility/codeRandom.js";
 
 /**
  * @access public
@@ -251,7 +251,7 @@ export const  editUser = async (req, res, next) => {
         const token =  createJwtToken({id : createUser._id});
    
         // get random code
-        const randCode = getrandCode(6)
+        const randCode = getRandCode(6)
         console.log(randCode);
         // token update on db
         const updateTkn = await UserToken.create({userId : createUser._id, verifyToken : token, verifyCode : randCode});
@@ -412,7 +412,7 @@ export const ForgotPassword = async (req, res, next) => {
                 const token = createJwtToken({id : recovery_user.id}, '1d') 
     
                 // create verify code
-                const verifyCode = getrandCode(6)
+                const verifyCode = getRandCode(6)
 
                 console.log(verifyCode);
                 // TOKEN CREATED for time validation
@@ -613,7 +613,7 @@ export const phoneVerifyCodeSent = async (req, res, next) => {
             }
 
             // create verify code
-            const verifyCode = getrandCode(6)
+            const verifyCode = getRandCode(6)
 
             console.log(verifyCode);
             // TOKEN CREATED for time validation
