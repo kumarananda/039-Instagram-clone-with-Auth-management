@@ -1,241 +1,205 @@
-
+/** @format */
 
 .post-container {
+  width: 100%;
+  height: auto;
+  padding-top: 5px 0;
+
+  .post-items {
     width: 100%;
-    height: auto;
-    padding-top: 5px 0;
+    margin: 10px 0;
+    // margin-top: 10px ;
+    height: max-content;
+    border: 1px solid rgba(219, 219, 219, 1);
+    border-radius: 7px;
 
-    
+    .post-header {
+      .post-header-cont {
+        height: 58px;
+        display: flex;
+        justify-content: space-between;
+        flex-direction: row;
+        position: relative;
+        align-items: center;
+        margin-left: 5px;
 
-    .post-items{
-        width: 100%;
-        margin: 10px 0;
-        // margin-top: 10px ;
-        height: max-content;
-        border: 1px solid rgba(219, 219, 219, 1);
-        border-radius: 7px;
+        .user-box {
+          display: flex;
+          align-items: center;
+          width: 100%;
+          // background-color: green;
 
-        .post-header {
-
-            .post-header-cont {
-                
-                height: 58px;
-                display: flex;
-                justify-content: space-between;
-                flex-direction: row;
-                position: relative;
-                align-items: center;
-                margin-left: 5px;
-            
-                .user-box {
-                    display: flex;
-                    align-items: center;
-                    width: 100%;
-                    // background-color: green;
-         
-    
-                    
-                    .user-Imge-box{
-                        
-                        width: 42px;
-                        height: 42px;
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                        background: url('../FlowingUsers/download.png');
-                        background-position: center center;
-                        background-repeat: no-repeat;
-                        background-size: contain;
-    
-                        .user-Imge {
-                            width: 36px;
-                            height: 36px;
-                            border-radius: 50%;
-                            
-                            
-                        }
-                    }
-                    .user-tex-box {
-                        margin-left: 5px;
-    
-                        .u-name {
-    
-                            span{
-    
-                            }
-                        }
-                        .user-data {
-                            span{
-    
-                            }
-                        }
-                    }
-    
-                }
-              
-            }
-            .menu-box {
-
-                width: 57px;
-                text-align: right;
-                margin-right: 5px;
-
-                
-                button{
-                    border: none;
-                    background-color: transparent;
-                    border-radius: 50%;
-                    height: 42px;
-                        width: 42px;
-                    svg{
-                        
-                        font-size: 20px;
-                    }
-                }
-            }
-        }
-
-        .post-media-con {
-
-
-            width: 100%;
-
-
-
-            img{
-               
-                width: 100%;
-                
-            }
-
-        }
-        .post-content-con {
-            // height: 150px;
-            margin-left: 10px;
-            margin-bottom: 5px;
-            
-
-            .action-box {
-                display: flex;
-                justify-content: space-between;
-
-                .content-left {
-                    width: 42%;
-
-                    ul {
-                        margin: 0;
-                        // margin-left: 5px;
-                        display: flex;
-                        align-items: center;
-                        padding: 10px 0;
-
-
-                        li{
-
-                            margin-right: 8px;
-                            svg {
-                                color: #3f3f3f;
-                            }
-                        }
-                    }
-                }
-                .content-medile {
-                    width: 16%;
-                }
-                .content-end {
-                    width: 42%;
-                    display: flex;
-                    justify-content: end;
-          
-                    align-items: center;
-                    
-
-                    svg{
-                        margin-right: 5px;
-                        color: #3f3f3f;
-                    }
-                }
-            }
-
-            .content-box {
-
-                .likes-count-wraper{
-                    span{
-                        margin-right: 5px;
-                        color: #524f4f;
-                        font-size: 14px;
-
-                        a{
-                            color: #000;
-                            font-weight: 600;
-                        }
-                    }
-
-
-                }
-                .post-text {
-                    margin-top: 5px;
-                }
-                .view-comments {
-                    a{
-                        color: #524f4f;
-                        font-size: 14px;
-                    }
-                }
-            }
-
-
-
-        }
-        .post-footer {
-            height: 58px;
-            border-top: 1px solid rgba(219, 219, 219, 1);
+          .user-Imge-box {
+            width: 42px;
+            height: 42px;
             display: flex;
-            flex-direction: row;
+            justify-content: center;
             align-items: center;
-            justify-content: space-between;
+            background: url("../FlowingUsers/download.png");
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-size: contain;
 
-            .emoji-box {
-                width: 58px;
-                height: 100%;
-
-
-                .emoji-icon{
-                    height: 100%;
-                    width: 100%;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    svg{
-
-                    }
-                }
+            .user-Imge {
+              width: 36px;
+              height: 36px;
+              border-radius: 50%;
             }
-            .comment-input {
-                height: 100%;
-                width: 100%;
-                input{
-                    height: 100%;
-                    width: 100%;
-                    padding: 10px; 
-                    border: none;
-                    outline: none;
-                    font-size: 14px;
-                }
-            }
-            .comment-post {
-                width: 58px;
-                height: 100%;
-                display: flex;
-                align-items: center;
-                justify-content: center;
+          }
+          .user-tex-box {
+            margin-left: 5px;
 
-                a{
+            // .u-name {
 
-                }
-            }
+            //     span{ }
+            // }
+            // .user-data {
+            //     span{
+
+            //     }
+            // }
+          }
         }
+      }
+      .menu-box {
+        width: 57px;
+        text-align: right;
+        margin-right: 5px;
+
+        button {
+          border: none;
+          background-color: transparent;
+          border-radius: 50%;
+          height: 42px;
+          width: 42px;
+          svg {
+            font-size: 20px;
+          }
+        }
+      }
     }
 
+    .post-media-con {
+      width: 100%;
 
+      img {
+        width: 100%;
+      }
+    }
+    .post-content-con {
+      // height: 150px;
+      margin-left: 10px;
+      margin-bottom: 5px;
+
+      .action-box {
+        display: flex;
+        justify-content: space-between;
+
+        .content-left {
+          width: 42%;
+
+          ul {
+            margin: 0;
+            // margin-left: 5px;
+            display: flex;
+            align-items: center;
+            padding: 10px 0;
+
+            li {
+              margin-right: 8px;
+              svg {
+                color: #3f3f3f;
+              }
+            }
+          }
+        }
+        .content-medile {
+          width: 16%;
+        }
+        .content-end {
+          width: 42%;
+          display: flex;
+          justify-content: end;
+
+          align-items: center;
+
+          svg {
+            margin-right: 5px;
+            color: #3f3f3f;
+          }
+        }
+      }
+
+      .content-box {
+        .likes-count-wraper {
+          span {
+            margin-right: 5px;
+            color: #524f4f;
+            font-size: 14px;
+
+            a {
+              color: #000;
+              font-weight: 600;
+            }
+          }
+        }
+        .post-text {
+          margin-top: 5px;
+        }
+        .view-comments {
+          a {
+            color: #524f4f;
+            font-size: 14px;
+          }
+        }
+      }
+    }
+    .post-footer {
+      height: 58px;
+      border-top: 1px solid rgba(219, 219, 219, 1);
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+
+      .emoji-box {
+        width: 58px;
+        height: 100%;
+
+        .emoji-icon {
+          height: 100%;
+          width: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          // svg{
+
+          // }
+        }
+      }
+      .comment-input {
+        height: 100%;
+        width: 100%;
+        input {
+          height: 100%;
+          width: 100%;
+          padding: 10px;
+          border: none;
+          outline: none;
+          font-size: 14px;
+        }
+      }
+      .comment-post {
+        width: 58px;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        // a{
+
+        // }
+      }
+    }
+  }
 }
