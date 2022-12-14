@@ -31,7 +31,8 @@ function App() {
 
 
   // get auth context
-  const {authdispatch, authstate} = useContext(AuthContext);
+  // const {authdispatch, authstate} = useContext(AuthContext);
+  const {authdispatch } = useContext(AuthContext);
 
   // get loder context
   const {loaderstate, loaderDispatch } = useContext(LoaderContext)

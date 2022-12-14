@@ -1,66 +1,61 @@
-import React from 'react'
-import Header from '../../components/Header/Header'
-import './Home.scss'
-import userImg from '../../components/Header/tempImg/293868842_442013060903697_3099029517532529372_n.jpg'
-import FlowingUsers from '../../components/FlowingUsers/FlowingUsers'
-import PostBox from '../../components/PostBox/PostBox'
-import FlowerSuggestions from '../../components/FlowerSuggestions/FlowerSuggestions'
-import Cookies from 'js-cookie'
-import { useNavigate } from 'react-router-dom'
-import { useContext } from 'react'
-import AuthContext from '../../context/AuthContext'
-import LoaderContext from '../../context/LoaderContext'
+/** @format */
 
+import React from "react";
+import Header from "../../components/Header/Header";
+import "./Home.scss";
+// import userImg from "../../components/Header/tempImg/293868842_442013060903697_3099029517532529372_n.jpg";
+import FlowingUsers from "../../components/FlowingUsers/FlowingUsers";
+import PostBox from "../../components/PostBox/PostBox";
+import FlowerSuggestions from "../../components/FlowerSuggestions/FlowerSuggestions";
+import Cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import AuthContext from "../../context/AuthContext";
+import LoaderContext from "../../context/LoaderContext";
 
 const Home = () => {
-
-  // use loader context 
-  const {loaderDispatch} = useContext(LoaderContext)
+  // use loader context
+  const { loaderDispatch } = useContext(LoaderContext);
 
   // use context
-  const {authdispatch, user} = useContext(AuthContext);
+  const { authdispatch, user } = useContext(AuthContext);
   // console.log(authstate.user);
   // console.log(user);
 
   //use navigate
   const navigate = useNavigate();
 
-
   //handle user logout
-  const handleUserLogout = (e)  => {
+  const handleUserLogout = e => {
     e.preventDefault();
 
-    Cookies.remove('token');
-    Cookies.remove('user');
+    Cookies.remove("token");
+    Cookies.remove("user");
 
-    authdispatch({type : 'USER_LOGOUT'})
+    authdispatch({ type: "USER_LOGOUT" });
 
-    navigate('/login')
-    loaderDispatch({type : "LOADER_START"})
-
-  }
-
+    navigate("/login");
+    loaderDispatch({ type: "LOADER_START" });
+  };
 
   return (
     <>
       <div className="site-header">
         <div className="site-header-box">
-          <Header/>
+          <Header />
         </div>
-        
       </div>
       <div className="site-content">
-
         <div className="post-aria-box">
           <div className="header-space-div"></div>
 
-            <FlowingUsers/>
+          <FlowingUsers />
 
-            <div className="post-aria-items">
-              <div className="post-box">
-              <PostBox/>
-              </div>
+          <div className="post-aria-items">
+            <div className="post-box">
+              <PostBox />
             </div>
+          </div>
         </div>
 
         <div className="suggestion-aria-box">
@@ -68,7 +63,7 @@ const Home = () => {
 
           <div className="user-control-box">
             <div className="user-img">
-              <img src={`${user.img ? user.img : 'https://www.w3schools.com/howto/img_avatar.png'}`} alt="" />
+              <img src={`${user.img ? user.img : "https://www.w3schools.com/howto/img_avatar.png"}`} alt="" />
             </div>
             <div className="user-data">
               <div className="user-name">
@@ -78,25 +73,25 @@ const Home = () => {
                 <span>{user.name}</span>
               </div>
               <div className="log-out-btn">
-                <a onClick={handleUserLogout} href="#">Log Out</a>
+                <a onClick={handleUserLogout} href="/">
+                  Log Out
+                </a>
               </div>
             </div>
             <div className="account-switch">
-              <span><a href="#">Switch</a> </span>
+              <span>
+                <a href="/">Switch</a>{" "}
+              </span>
             </div>
           </div>
           <div className="flower-Suggestions">
-            <FlowerSuggestions/>
+            <FlowerSuggestions />
           </div>
-
         </div>
       </div>
-      <div className="site-footer">
-        
-      </div>
-    
+      <div className="site-footer"></div>
     </>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
