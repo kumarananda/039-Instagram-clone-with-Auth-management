@@ -88,7 +88,7 @@ function App() {
         progress={loaderstate}
         onLoaderFinished={() => loaderDispatch({type : "LODER_END"})}
       />
-      <ToastContainer/>
+      <ToastContainer limit={1}/>
 
       <Routes>
         <Route path="/login" element={ <AuthRedirectUser> <Login /> </AuthRedirectUser>  }/>
